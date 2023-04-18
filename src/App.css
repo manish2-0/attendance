@@ -1,0 +1,264 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.App {
+  text-align: center;
+}
+
+
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+.text-fix {
+  @apply text-[#1e5b98];
+}
+
+.bg-fix {
+  @apply bg-[#1e5b98];
+}
+
+
+/* animated button */
+.ani-button {
+  padding: 10px 25px;
+  font-size: 20px;
+  border: none;
+  background-color: #2368ad;
+  color: aliceblue;
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.ani-button:hover {
+  background-color: #fcfcfc;
+  color: #2368ad;
+}
+
+.ani-button::before {
+  content: "";
+  position: absolute;
+  /* width: 0%;
+  height: 0%; */
+  z-index: -1;
+  top: -3px;
+  left: -3px;
+  background-color: #2368ad;
+  /* transition: all 0.2s ease; */
+  animation: bor1 0.5s ease;
+  @apply rounded-sm;
+}
+
+
+.ani-button::after {
+  content: "";
+  position: absolute;
+  /* width: 0%;
+  height: 0%; */
+  bottom: -3px;
+  right: -3px;
+  background-color: #2368ad;
+  z-index: -1;
+  /* transition: all 0.2s ease; */
+  animation: bor1 0.5s ease;
+  @apply rounded-sm;
+}
+
+
+.ani-button:hover:before,
+.ani-button:hover:after {
+  animation: bor 0.5s ease;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+}
+
+@keyframes bor {
+  from {
+    width: 0%;
+    height: 0%;
+  }
+
+  to {
+    width: calc(100% + 6px);
+    height: calc(100% + 6px);
+  }
+}
+
+@keyframes bor1 {
+  to {
+    width: 0%;
+    height: 0%;
+  }
+
+  from {
+    width: calc(100% + 6px);
+    height: calc(100% + 6px);
+  }
+}
+
+
+/* LOGIN */
+
+.ani-buttonlogin {
+  padding: 10px 25px;
+  font-size: 20px;
+  border: none;
+  background-color: #1C4C7B;
+  color: aliceblue;
+  transition: all 0.4s ease;
+  position: relative;
+  /* z-index: 30; */
+}
+
+.ani-buttonlogin:hover {
+  background-color: #ffffff;
+  color: black;
+}
+
+.ani-buttonlogin::before {
+  content: "";
+  position: absolute;
+  /* width: 0%;
+  height: 0%; */
+  z-index: -1;
+  top: -3px;
+  left: -3px;
+  background-color: #002447;
+  /* transition: all 0.2s ease; */
+  animation: bor1 0.5s ease;
+  @apply rounded-sm;
+}
+
+
+.ani-buttonlogin::after {
+  content: "";
+  position: absolute;
+  /* width: 0%;
+  height: 0%; */
+  bottom: -3px;
+  right: -3px;
+  background-color: #002447;
+  z-index: -1;
+  /* transition: all 0.2s ease; */
+  animation: bor1 0.5s ease;
+  @apply rounded-sm;
+}
+
+
+.ani-buttonlogin:hover:before,
+.ani-buttonlogin:hover:after {
+  animation: bor 0.5s ease;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+}
+
+@keyframes bor {
+  from {
+    width: 0%;
+    height: 0%;
+  }
+
+  to {
+    width: calc(100% + 6px);
+    height: calc(100% + 6px);
+  }
+}
+
+@keyframes bor1 {
+  to {
+    width: 0%;
+    height: 0%;
+  }
+
+  from {
+    width: calc(100% + 6px);
+    height: calc(100% + 6px);
+  }
+}
+
+
+/* Loader */
+#cover-spin {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 20;
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#cover-spin::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 48%;
+  top: 40%;
+  width: 40px;
+  height: 40px;
+  border-style: solid;
+  border-color: #0e3e6f;
+  border-top-color: transparent;
+  border-width: 4px;
+  border-radius: 50%;
+  -webkit-animation: spin .8s linear infinite;
+  animation: spin .8s linear infinite;
+}
