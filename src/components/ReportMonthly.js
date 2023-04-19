@@ -116,6 +116,7 @@ const ReportMonthly = () => {
             }
 
             tot = rate * atte;
+            tot = tot.toFixed();
             bal = tot - adv + food + travel;
             // console.log(tot);
             // console.log(bal)
