@@ -164,7 +164,7 @@ const AttendanceAdmin = () => {
                         "text2": "Attendance marked succesfully."
                     });
 
-                    navigate('/adminattendance');
+                    navigate('/');
 
                 }
                 else {
