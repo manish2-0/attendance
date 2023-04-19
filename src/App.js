@@ -21,6 +21,7 @@ import PersistLogin from './components/PersistLogin';
 import RequireAuth from './components/RequireAuth';
 import Modal from './modals/Modal';
 import Navbar from './components/Navbar';
+import AttendanceDirect from './components/AttendanceDirect';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
                 <Route path='editsite' element={<EditSite />} />
                 <Route path='allsite' element={<ViewAllSite />} />
                 <Route path='adminattendance' element={<AttendanceAdmin />} />
+                <Route path='directattendance' element={<AttendanceDirect />} />
                 <Route path='supervisorattendance' element={<AttendanceSupervisor />} />
                 <Route path='editattendance' element={<EditAttendance />} />
                 <Route path='report' element={<ReportMonthly />} />

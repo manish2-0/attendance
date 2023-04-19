@@ -109,6 +109,16 @@ const ViewAllWorker = () => {
                                 <th scope="col" className="text-center border px-6 py-3 whitespace-nowrap">
                                     View
                                 </th>
+
+                                {
+                                    localStorage.getItem("role") == "Admin"
+                                        ? <th scope="col" className="text-center border px-1 py-3 whitespace-nowrap">
+                                            Attendance
+                                        </th>
+                                        : <></>
+                                }
+
+
                                 {
                                     localStorage.getItem("role") == "Admin"
                                         ? <th scope="col" className="text-center border px-6 py-3 whitespace-nowrap">
@@ -136,36 +146,44 @@ const ViewAllWorker = () => {
                                         return search.er.toLowerCase() === ""
                                             ? user
                                             : user.er_no.toLowerCase().includes(search.er.toLowerCase());
-                                    }).map((ele, index) => 
+                                    }).map((ele, index) =>
                                         <tr className="bg-white border-b hover:bg-gray-50">
 
-                                        <th scope="row" className="text-center border py-2 font-medium text-gray-900 whitespace-nowrap ">
-                                            {index + 1}
-                                        </th>
-                                        <td className="text-center border py-2">
-                                            {ele.er_no}
-                                        </td>
-                                        <td className="text-center border px-2 py-2 whitespace-nowrap">
-                                            {ele.name}
-                                        </td>
-                                        <td className="text-center border px-5 py-2">
-                                            {ele.aadhar}
-                                        </td>
-                                        <td className="text-center border px-4 py-2 text-fix hover:underline underline-offset-2">
-                                            <Link state={{ values: ele }} to="viewworker" className="font-medium text-fix hover:underline">View</Link>
-                                        </td>
+                                            <th scope="row" className="text-center border py-2 font-medium text-gray-900 whitespace-nowrap ">
+                                                {index + 1}
+                                            </th>
+                                            <td className="text-center border py-2">
+                                                {ele.er_no}
+                                            </td>
+                                            <td className="text-center border px-2 py-2 whitespace-nowrap">
+                                                {ele.name}
+                                            </td>
+                                            <td className="text-center border px-5 py-2">
+                                                {ele.aadhar}
+                                            </td>
+                                            <td className="text-center border px-4 py-2 text-fix hover:underline underline-offset-2">
+                                                <Link state={{ values: ele }} to="viewworker" className="font-medium text-fix hover:underline">View</Link>
+                                            </td>
 
-                                        {
-                                            localStorage.getItem("role") == "Admin"
-                                                ? <td className="text-center border px-4 py-2 text-fix hover:underline underline-offset-2">
-                                                    <Link state={{ values: ele }} to="editworker" className="font-medium text-fix hover:underline">Edit</Link>
-                                                </td>
-                                                : <></>
-                                        }
+                                            {
+                                                localStorage.getItem("role") == "Admin"
+                                                    ? <td className="text-center border px-1 py-2 text-fix hover:underline underline-offset-2">
+                                                        <Link state={{ values: ele }} to="/directattendance" className="font-medium hover:underline">Add</Link>
+                                                    </td>
+                                                    : <></>
+                                            }
+
+                                            {
+                                                localStorage.getItem("role") == "Admin"
+                                                    ? <td className="text-center border px-4 py-2 text-fix hover:underline underline-offset-2">
+                                                        <Link state={{ values: ele }} to="editworker" className="font-medium text-fix hover:underline">Edit</Link>
+                                                    </td>
+                                                    : <></>
+                                            }
 
 
-                                    </tr>
-                                    
+                                        </tr>
+
                                     )
                             }
 
