@@ -170,7 +170,7 @@ const EditAttendance = () => {
                                     <p className='text-lg text-fix mr-2'>Site Code:</p>
                                     <select defaultValue={data.site_code - data.site_name} onChange={handlechange} name="site_code" className="h-9 w-32 text-base border rounded border-slate-300" required>
                                         <option className=''>Select..</option>
-                                        <option selected value={data.site_code}>{data.site_code}-{data.site_name}</option>
+                                        <option selected value={data.site_code}>{data.site_code}</option>
                                         {
                                             sites.map((val) =>
                                                 <option value={val.site_code}> {val.site_code}-{val.site_name} </option>
