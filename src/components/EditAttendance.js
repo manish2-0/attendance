@@ -158,7 +158,7 @@ const EditAttendance = () => {
 
                                 <div className='flex items-center flex-wrap my-2'>
                                     <p className='text-lg text-fix mr-2'>Site Code:</p>
-                                    <select defaultValue={data.site_code + "-" + data.site_name} onChange={handlechange} name="site_code" className="h-9 w-32 text-base border rounded border-slate-300" required>
+                                    <select defaultValue={data.site_code-data.site_name} onChange={handlechange} name="site_code" className="h-9 w-32 text-base border rounded border-slate-300" required>
                                         <option selected className=''>Select..</option>
                                         {
                                             sites.map((val) =>
