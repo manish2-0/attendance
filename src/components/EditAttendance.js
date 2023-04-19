@@ -140,6 +140,7 @@ const EditAttendance = () => {
                                     <p className='text-lg text-fix mr-2'>Present:</p>
                                     <select onChange={handlechange} defaultValue={data.attendance} name="attendance" className="h-9 w-32 text-base border rounded border-slate-300" required>
                                         <option selected className=''>Select..</option>
+                                        <option>0</option>
                                         <option>0.25</option>
                                         <option>0.5</option>
                                         <option>0.75</option>
@@ -157,11 +158,11 @@ const EditAttendance = () => {
 
                                 <div className='flex items-center flex-wrap my-2'>
                                     <p className='text-lg text-fix mr-2'>Site Code:</p>
-                                    <select defaultValue={data.site_code} onChange={handlechange} name="site_code" className="h-9 w-32 text-base border rounded border-slate-300" required>
+                                    <select defaultValue={data.site_code + "-" + data.site_name} onChange={handlechange} name="site_code" className="h-9 w-32 text-base border rounded border-slate-300" required>
 
                                         {
                                             sites.map((val) =>
-                                                <option value={val.site_code}>{val.site_code}-{val.site_name}</option>
+                                                <option value={val.site_code}> {val.site_code}-{val.site_name} </option>
                                             )
                                         }
                                     </select>
@@ -169,27 +170,27 @@ const EditAttendance = () => {
 
                                 <div className='flex items-center flex-wrap my-2'>
                                     <p className='text-lg text-fix mr-2'>Time:</p>
-                                    <input onChange={handlechange} defaultValue={data.time} name="time" className='w-full sm:w-72 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="text" placeholder='Time' required />
+                                    <input onChange={handlechange} defaultValue={data.time} name="time" className='w-full sm:w-72 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="text" placeholder='Time' />
                                 </div>
 
                                 <div className='flex items-center flex-wrap my-2'>
                                     <p className='text-lg text-fix mr-2'>Advance:</p>
-                                    <input onChange={handlechange} defaultValue={data.advance} onWheel={e => e.target.blur()} name="advance" className='w-40 sm:w-52 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="number" placeholder='Advance' required />
+                                    <input onChange={handlechange} defaultValue={data.advance} onWheel={e => e.target.blur()} name="advance" className='w-40 sm:w-52 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="number" placeholder='Advance' />
                                 </div>
 
                                 <div className='flex items-center flex-wrap my-2'>
                                     <p className='text-lg text-fix mr-2'>Food:</p>
-                                    <input onChange={handlechange} defaultValue={data.food} onWheel={e => e.target.blur()} name="food" className='w-40 sm:w-52 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="number" placeholder='Food' required />
+                                    <input onChange={handlechange} defaultValue={data.food} onWheel={e => e.target.blur()} name="food" className='w-40 sm:w-52 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="number" placeholder='Food' />
                                 </div>
 
                                 <div className='flex items-center flex-wrap my-2'>
                                     <p className='text-lg text-fix mr-2'>Travelling:</p>
-                                    <input onChange={handlechange} defaultValue={data.travelling} onWheel={e => e.target.blur()} name="travelling" className='w-40 sm:w-52 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="number" placeholder='Travelling' required />
+                                    <input onChange={handlechange} defaultValue={data.travelling} onWheel={e => e.target.blur()} name="travelling" className='w-40 sm:w-52 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="number" placeholder='Travelling' />
                                 </div>
 
                                 <div className='flex items-center flex-wrap my-2'>
                                     <p className='text-lg text-fix mr-2'>Remarks:</p>
-                                    <input onChange={handlechange} defaultValue={data.remarks} name="remarks" className='w-full sm:w-72 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="text" placeholder='Remarks' required />
+                                    <input onChange={handlechange} defaultValue={data.remarks} name="remarks" className='w-full sm:w-72 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="text" placeholder='Remarks' />
                                 </div>
 
                                 <button className="rounded-sm ani-button w-fit">Done</button>
