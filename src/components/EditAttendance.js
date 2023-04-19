@@ -63,6 +63,16 @@ const EditAttendance = () => {
         e.preventDefault();
         setloading(true);
 
+        if (data.attendance == "-" || data.attendance == "Select.." || data.site_code == "-" || data.site_code == "Select..") {
+            setloading(false);
+            setmodal(true);
+            await setmodalmessage({
+                "text1": "Error",
+                "text2": "Please select attendance and site code."
+            });
+            return 0;
+        }
+
         try {
             await api.put(`attendance/attendance-update`, JSON.stringify(data)).then(async function (response) {
                 // console.log(response)
@@ -158,7 +168,7 @@ const EditAttendance = () => {
 
                                 <div className='flex items-center flex-wrap my-2'>
                                     <p className='text-lg text-fix mr-2'>Site Code:</p>
-                                    <select defaultValue={data.site_code-data.site_name} onChange={handlechange} name="site_code" className="h-9 w-32 text-base border rounded border-slate-300" required>
+                                    <select defaultValue={data.site_code - data.site_name} onChange={handlechange} name="site_code" className="h-9 w-32 text-base border rounded border-slate-300" required>
                                         <option className=''>Select..</option>
                                         <option selected value={data.site_code}>{data.site_code}-{data.site_name}</option>
                                         {
