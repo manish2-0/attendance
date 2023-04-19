@@ -274,6 +274,7 @@ const AttendanceSupervisor = () => {
                                                 <p className='text-lg text-fix mr-2'>Present:</p>
                                                 <select onChange={handlechange} name="attendance" className="h-9 w-32 text-base border rounded border-slate-300" required>
                                                     <option selected className=''>Select..</option>
+                                                    <option>0</option>
                                                     <option>0.25</option>
                                                     <option>0.5</option>
                                                     <option>0.75</option>
