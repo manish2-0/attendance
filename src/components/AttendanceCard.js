@@ -40,7 +40,7 @@ const AttendanceCard = ({ user }) => {
         <>
             <span className='w-full block border mb-2'></span>
 
-            <p className='text-fix'>Attendance for: January,2023</p>
+            <p className='text-fix'>Attendance for: {data.month},{data.year}</p>
 
             <div className="relative overflow-x-auto scrollbar-hide">
 
