@@ -150,15 +150,16 @@ const AttendanceCard = ({ user }) => {
 
                         <tr className='border p-1'>
                             <td colSpan={11} className='p-1 text-base'>
+                                <span className='text-fix font-medium'> Total Food and Travelling:</span> {parseInt(temp.food) + parseInt(temp.travel)}/-
+                            </td>
+                        </tr>
+                        
+                        <tr className='border p-1'>
+                            <td colSpan={11} className='p-1 text-base'>
                                 <span className='text-fix font-medium'> Advance:</span> {temp.adv}/-
                             </td>
                         </tr>
 
-                        <tr className='border p-1'>
-                            <td colSpan={11} className='p-1 text-base'>
-                                <span className='text-fix font-medium'> Total Food and Travelling:</span> {parseInt(temp.food) + parseInt(temp.travel)}/-
-                            </td>
-                        </tr>
 
                         {
                             localStorage.getItem("role") == "Admin"

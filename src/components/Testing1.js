@@ -62,8 +62,8 @@ const Testing1 = () => {
     const submitform = (e) => {
         e.preventDefault();
 
-        console.log(time1[0])
-        console.log(time2[0])
+        // console.log(time1[0])
+        // console.log(time2[0])
 
         if (time1 == "" || time2 == "") {
             setresponse("Please select both times");
@@ -82,30 +82,50 @@ const Testing1 = () => {
             return 0;
         }
 
-        if ((time1[0] >= 6 && time1[0] <= 8 && time1[1] >= 0 && time1[1] <= 59) || (time1[0] == 9 && time1[1] >= 0 && time1[1] <= 45)) {            // Intime morning 6:00 to 9:45
+        if ((time1[0] >= 6 && time1[0] <= 8 && time1[1] >= 0 && time1[1] <= 59) || (time1[0] == 9 && time1[1] >= 0 && time1[1] <= 45)) { // Intime morning 6:00 to 9:45
+
             if ((time2[0] == 18 && time2[1] >= 30) || (time2[0] == 19 && time2[1] <= 30)) {       //Outtime condition 1 (normal time)
-                // Present = 1 
+
                 setpresent(1);
-                console.log("single present")
-                console.log(present)
+                setdelay(0);
+                setovertime(0);
+                setundertime(0);
 
             }
+
 
             if ((time2[0] == 19 && time2[1] >= 31) || (time2[0] >= 20 && time2[1] >= 0 && time2[1] <= 59))  //Outtime condition 2 (overtime)
             {
                 // Present = 1 
                 setpresent(1);
                 // Add extra present
+
                 let extra = extraworkinghours();
-                console.log("single present")
-                console.log(extra)
+                let extraminutes = extra[0] * 60 + extra[1];
+                let a = (extraminutes / 15).toFixed(1);
+                setovertime(a);
+
+                setdelay(0);
+                setundertime(0);
+
+
             }
 
             if ((time2[0] <= 18 && time2[1] <= 29) || (time2[0] < 18 && time2[1] <= 59 && time2[1] >= 0))  //Outtime condition 3 (undertime)
             {
-                console.log("Underworking Time")
-                let a = underworkinghours();
-                console.log(a)
+                setpresent(1);
+
+                let under = underworkinghours();
+                let underminutes = under[0] * 60 + under[1];
+                let a = (underminutes / 15).toFixed(1);
+                setundertime(a);
+
+                setovertime(0);
+                setdelay(0);
+
+
+                // console.log("Underworking Time")
+
             }
         }
 
@@ -124,6 +144,12 @@ const Testing1 = () => {
                 // Add extra present
             }
         }
+
+
+        console.log("Present:" + present)
+        console.log("Overtime:" + overtime)
+        console.log("Undertime:" + undertime)
+        console.log("Delay:" + delay)
 
 
 
