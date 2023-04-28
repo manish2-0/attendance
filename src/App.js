@@ -38,7 +38,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route path='login' element={<Login />} />
-            {/* <Route path='testing' element={<Testing1 />} /> */}
+            <Route path='testing' element={<Testing1 />} />
 
             <Route element={<PersistLogin />}>
               <Route element={<RequireAuth />}>
