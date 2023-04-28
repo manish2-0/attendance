@@ -48,9 +48,9 @@ const AttendanceCard = ({ user }) => {
                 <table className="container w-auto md:w-full m-1 mx-auto text-xs lg:text-sm text-left text-gray-500 border shadow">
                     <thead className="text-white uppercase border-b border-gray-300 bg-fix">
                         <tr className=''>
-                            <th scope="col" className="text-center border px-1 whitespace-nowrap">
+                            {/* <th scope="col" className="text-center border px-1 whitespace-nowrap">
                                 No.
-                            </th>
+                            </th> */}
                             <th scope="col" className="text-center border px-1 whitespace-nowrap">
                                 Date
                             </th>
@@ -96,9 +96,9 @@ const AttendanceCard = ({ user }) => {
                             attendance.map((ele, index) =>
                                 <tr className="bg-white border-b hover:bg-gray-50 text-[10px] lg:text-sm">
 
-                                    <th scope="row" className="text-center border py-1 font-medium text-fix ">
+                                    {/* <th scope="row" className="text-center border py-1 font-medium text-fix ">
                                         {index + 1}
-                                    </th>
+                                    </th> */}
                                     <td className="text-center border py-1 px-1 whitespace-nowrap">
                                         {moment(ele.date).format("DD/MM/YYYY")}
                                     </td>

@@ -22,6 +22,14 @@ import RequireAuth from './components/RequireAuth';
 import Modal from './modals/Modal';
 import Navbar from './components/Navbar';
 import AttendanceDirect from './components/AttendanceDirect';
+import ViewDailyAttendance from './components/ViewDailyAttendance';
+import CashLabourAttendance from './components/CashLabourAttendance';
+import ReportCashLabour from './components/ReportCashLabour';
+import Testing1 from './components/Testing1';
+import ReportDailySupervisor from './components/ReportDailySupervisor';
+import ReportCashSupervisor from './components/ReportCashSupervisor';
+import CashAttendanceSupervisor from './components/CashAttendanceSupervisor';
+import EditCashLabour from './components/EditCashLabour';
 
 function App() {
   return (
@@ -30,6 +38,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route path='login' element={<Login />} />
+            {/* <Route path='testing' element={<Testing1 />} /> */}
 
             <Route element={<PersistLogin />}>
               <Route element={<RequireAuth />}>
@@ -47,6 +56,16 @@ function App() {
                 <Route path='editattendance' element={<EditAttendance />} />
                 <Route path='report' element={<ReportMonthly />} />
                 <Route path='navbar' element={<Navbar />} />
+
+                <Route path='dailyattendance' element={<ViewDailyAttendance />} />
+                <Route path='cashlabourreport' element={<ReportCashLabour />} />
+                <Route path='cashattendanceadmin' element={<CashLabourAttendance />} />
+                <Route path='editcash' element={<EditCashLabour />} />
+
+                <Route path='cashattendancesupervisor' element={<CashAttendanceSupervisor />} />
+                <Route path='reportdailysupervisor' element={<ReportDailySupervisor />} />
+                <Route path='reportcashsupervisor' element={<ReportCashSupervisor />} />
+
               </Route>
             </Route>
 

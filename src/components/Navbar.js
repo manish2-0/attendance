@@ -160,6 +160,18 @@ function Navbar() {
                                                             </Menu.Item>
                                                             <Menu.Item>
                                                                 {({ active }) => (
+                                                                    <Link to="/cashattendanceadmin"
+                                                                        className={classNames(
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            'block w-full px-4 py-2 text-center'
+                                                                        )}
+                                                                    >
+                                                                        Cash Labour Attendance
+                                                                    </Link>
+                                                                )}
+                                                            </Menu.Item>
+                                                            <Menu.Item>
+                                                                {({ active }) => (
                                                                     <Link to="/addsite"
                                                                         className={classNames(
                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
@@ -191,6 +203,18 @@ function Navbar() {
                                                                         )}
                                                                     >
                                                                         Generate Report
+                                                                    </Link>
+                                                                )}
+                                                            </Menu.Item>
+                                                            <Menu.Item>
+                                                                {({ active }) => (
+                                                                    <Link to="/cashlabourreport"
+                                                                        className={classNames(
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            'block w-full px-4 py-2 text-center'
+                                                                        )}
+                                                                    >
+                                                                        Cash Labour Report
                                                                     </Link>
                                                                 )}
                                                             </Menu.Item>
@@ -264,6 +288,45 @@ function Navbar() {
                                                                 )}
                                                             </Menu.Item>
 
+                                                            <Menu.Item>
+                                                                {({ active }) => (
+                                                                    <Link to="/cashattendancesupervisor"
+                                                                        className={classNames(
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            'block w-full px-4 py-2 text-center'
+                                                                        )}
+                                                                    >
+                                                                        Cash Labour Attendance
+                                                                    </Link>
+                                                                )}
+                                                            </Menu.Item>
+
+                                                            <Menu.Item>
+                                                                {({ active }) => (
+                                                                    <Link to="/reportdailysupervisor"
+                                                                        className={classNames(
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            'block w-full px-4 py-2 text-center'
+                                                                        )}
+                                                                    >
+                                                                        View Daily Attendance
+                                                                    </Link>
+                                                                )}
+                                                            </Menu.Item>
+
+                                                            <Menu.Item>
+                                                                {({ active }) => (
+                                                                    <Link to="/reportcashsupervisor"
+                                                                        className={classNames(
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            'block w-full px-4 py-2 text-center'
+                                                                        )}
+                                                                    >
+                                                                        View Cash Labour Attendance
+                                                                    </Link>
+                                                                )}
+                                                            </Menu.Item>
+
 
                                                             <Menu.Item>
                                                                 {({ active }) => (
@@ -299,8 +362,6 @@ function Navbar() {
                                         </Menu>
                                         : <></>
                                 }
-
-
 
 
                             </div>

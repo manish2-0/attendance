@@ -1,25 +1,44 @@
-import React, { useEffect, useState } from 'react'
-import moment from 'moment/moment';
-import Loader from './Loader';
-import Modal from '../modals/Modal';
+import React from 'react'
+import Loader from './Loader'
+import Modal from '../modals/Modal'
 import useModal from '../hooks/useModal';
+import { useState, useEffect } from 'react'
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import moment from 'moment';
 
-const ReportMonthly = () => {
+
+const ReportCashLabour = () => {
 
     const [loading, setloading] = useState(false);
     const { modal, setmodal, modalmessage, setmodalmessage } = useModal();
 
+    const api = useAxiosPrivate();
+
     const [data, setdata] = useState([]);
     const [temp, settemp] = useState([]);
 
-    const api = useAxiosPrivate();
+    const [sites, setsites] = useState([]);
+
+    const [siteselected, setsiteselected] = useState({ "site": "" });
 
     const [inputs, setinputs] = useState({
         "from": "-",
         "to": "-"
     });
 
+    const getpendingsites = () => {
+        setloading(true);
+
+        api.get(`site/site-get-pending`).then(function (response) {
+            if (response?.data?.data) {
+                setsites(response.data.data);
+                // console.log(response.data.data);
+
+            }
+            setloading(false);
+        })
+    }
 
     const handlechange = async (e) => {
         e.preventDefault();
@@ -31,11 +50,24 @@ const ReportMonthly = () => {
 
 
     }
+    const handlesite = async (e) => {
+        e.preventDefault();
+        const value = e.target.value;
+
+        if (value == "Show All") {
+            setsiteselected({ "site": "" });
+        }
+        else {
+            setsiteselected({ "site": value });
+        }
+
+        // console.log(value)
+
+    }
 
     const submitform = async (e) => {
         e.preventDefault();
         setdata([]);
-        settemp([]);
         setloading(true);
 
         if (inputs.from == "" || inputs.to == "") {
@@ -50,9 +82,9 @@ const ReportMonthly = () => {
         }
 
         try {
-            await api.post('attendance/attendance-report', JSON.stringify(inputs)).then(async function (response) {
+            await api.post('cash/cash-report', JSON.stringify(inputs)).then(async function (response) {
                 if (response?.data?.data) {
-                    settemp(response.data.data)
+                    setdata(response.data.data)
                     setloading(false);
                     setmodal(true);
                     await setmodalmessage({
@@ -66,7 +98,7 @@ const ReportMonthly = () => {
                     setmodal(true);
                     setmodalmessage({
                         "text1": "Done",
-                        "text2": "No attendance Found."
+                        "text2": "No labour Found."
                     });
 
                 }
@@ -79,49 +111,14 @@ const ReportMonthly = () => {
             setmodal(true);
             setmodalmessage({
                 "text1": "Error Occured",
-                "text2": "No server response"
+                "text2": "No labour response"
             });
         }
     }
 
     useEffect(() => {
-
-        for (let i = 0; i < temp.length; i++) {
-
-            let count = 0;
-            let name = temp[i].name;
-            let er_no = temp[i].er_no;
-            let rate = temp[i].rate;
-
-            let adv = 0;
-            let food = 0;
-            let travel = 0;
-            let atte = 0.00;
-            let bal = 0;
-            let tot = 0;
-
-            while ((i + count) < temp.length && temp[i].er_no == temp[i + count].er_no) {
-                adv = adv + parseInt(temp[i + count].advance);
-                food = food + parseInt(temp[i + count].food);
-                travel = travel + parseInt(temp[i + count].travelling);
-                atte = (parseFloat(atte) + parseFloat(temp[i + count].attendance)).toFixed(2);
-
-                count++;
-            }
-
-            tot = rate * atte;
-            tot = tot.toFixed();
-            bal = tot - adv + food + travel;
-            // console.log(tot);
-            // console.log(bal)
-
-            setdata(val => [...val, { "name": name, "er_no": er_no, "rate": rate, "atte": atte, "total": tot, "advance": adv, "food": food, "travelling": travel, "balance": bal }])
-
-            i = i + count - 1;
-
-        }
-
-    }, [temp]);
+        getpendingsites();
+    }, []);
 
 
     return (
@@ -144,7 +141,7 @@ const ReportMonthly = () => {
             <div className='px-2 pt-20'>
 
                 <div className=' md:w-[700px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1400px] mx-auto'>
-                    <h1 className='text-2xl text-fix'>Generate Report</h1>
+                    <h1 className='text-2xl text-fix underline underline-offset-2 mb-2'>Cash Labour Report</h1>
 
                     <div className='flex flex-wrap flex-row'>
                         <form onSubmit={submitform}>
@@ -153,13 +150,28 @@ const ReportMonthly = () => {
 
                                 <div className='flex items-center flex-wrap pr-6'>
                                     <h1 className='text-fix text-lg w-fit pr-1'>From:</h1>
-                                    <input onChange={handlechange} type='date' name='from' className='border rounded border-slate-300' />
+                                    <input onChange={handlechange} name="from" type='date' className="h-9 text-base border rounded border-slate-300" required />
+
                                 </div>
 
-                                <div className='flex  items-center flex-wrap'>
+                                <div className='flex  items-center flex-wrap pr-6'>
                                     <h1 className='text-fix text-lg w-fit pr-1'>To:</h1>
-                                    <input onChange={handlechange} type='date' name='to' className='border rounded border-slate-300' />
+                                    <input onChange={handlechange} name="to" type='date' className="h-9 text-base border rounded border-slate-300" required />
+
                                 </div>
+
+                                <div className='flex items-center flex-wrap'>
+                                    <h1 className='text-fix text-lg w-fit pr-1'>Site Code:</h1>
+                                    <select onChange={handlesite} name="site_code" className="h-9 w-32 text-base border rounded border-slate-300">
+                                        <option selected className=''>Show All</option>
+                                        {
+                                            sites.map((val) =>
+                                                    <option value={val.site_code}>{val.site_code}-{val.site_name}</option>
+                                                )
+                                        }
+                                    </select>
+                                </div>
+
 
                             </div>
 
@@ -171,7 +183,7 @@ const ReportMonthly = () => {
 
                     </div>
 
-                    <h1 className='text-lg text-slate-600'> <span className='underline underline-offset-2 text-fix'>Montly Attendance:</span> {inputs.month},{inputs.year}</h1>
+                    <h1 className='text-lg text-slate-600'> <span className='underline underline-offset-2 text-fix'>Montly Attendance:</span> January,2023</h1>
 
                 </div>
 
@@ -182,32 +194,35 @@ const ReportMonthly = () => {
                                 <th scope="col" className="text-center border px-2 whitespace-nowrap">
                                     No.
                                 </th>
-                                <th scope="col" className="text-center border px-1 whitespace-nowrap">
-                                    ER No.
+                                <th scope="col" className="text-center border px-1 whitespace-nowrap ">
+                                    Date
                                 </th>
                                 <th scope="col" className="text-center border px-6 whitespace-nowrap ">
                                     Name
                                 </th>
-                                <th scope="col" className="text-center border px-3 whitespace-nowrap ">
-                                    Base Rate
+                                <th scope="col" className="text-center border px-1 whitespace-nowrap ">
+                                    Site Code
                                 </th>
-                                <th scope="col" className="text-center border px-2 whitespace-nowrap ">
+                                <th scope="col" className="text-center border px-1 whitespace-nowrap ">
                                     Present
                                 </th>
-                                <th scope="col" className="text-center border px-2 whitespace-nowrap ">
-                                    Total
-                                </th>
-                                <th scope="col" className="text-center border px-3 py-1 whitespace-nowrap">
-                                    Advance
-                                </th>
-                                <th scope="col" className="text-center border px-2 py-1 whitespace-nowrap">
-                                    Food
+                                <th scope="col" className="text-center border px-1 whitespace-nowrap ">
+                                    Base Rate
                                 </th>
                                 <th scope="col" className="text-center border px-1 py-1 whitespace-nowrap">
-                                    Travelling
+                                    Food
+                                </th>
+                                <th scope="col" className="text-center border px-2 py-1 whitespace-nowrap">
+                                    Time
+                                </th>
+                                <th scope="col" className="text-center border px-2 py-1 whitespace-nowrap">
+                                    Remarks
                                 </th>
                                 <th scope="col" className="text-center border px-3 py-1 whitespace-nowrap">
-                                    Balance
+                                    Marked By
+                                </th>
+                                <th scope="col" className="text-center border px-1 py-1 whitespace-nowrap">
+                                    Edit
                                 </th>
 
                             </tr>
@@ -217,54 +232,56 @@ const ReportMonthly = () => {
                             {
                                 data.length == 0
                                     ? <tr className="bg-white border-b hover:bg-gray-50 text-base">
-                                        <td colSpan={10} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                        <td colSpan={6} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
                                             No data found
                                         </td>
                                     </tr>
                                     :
 
-
-                                    data.map((ele, no) =>
+                                    data.filter((val) => {
+                                        return siteselected.site == ""
+                                            ? val
+                                            : val.site_code == siteselected.site
+                                    }).map((ele, index) =>
                                         <tr className="bg-white border-b hover:bg-gray-50 text-[12px]">
 
                                             <th scope="row" className="text-center border py-1 font-medium text-gray-900 whitespace-nowrap ">
-                                                {no + 1}
+                                                {index + 1}
                                             </th>
-                                            <td className="text-center border py-1">
-                                                {ele.er_no}
+                                            <td className="text-center border px-2 py-1 whitespace-wrap">
+                                                {moment(ele.date).format("DD-MM-YYYY")}
                                             </td>
                                             <td className="text-center border px-2 py-1 whitespace-wrap">
                                                 {ele.name}
                                             </td>
-                                            <td className="text-center border px-2 py-1">
+                                            <td className="text-center border px-1 py-1">
+                                                {ele.site_code}
+                                            </td>
+                                            <td className="text-center border px-1 py-1">
+                                                {ele.present}
+                                            </td>
+                                            <td className="text-center border px-1 py-1">
                                                 {ele.rate}/-
-                                            </td>
-                                            <td className="text-center border px-1 py-1">
-                                                {ele.atte}
-                                            </td>
-                                            <td className="text-center border px-1 py-1">
-                                                {ele.total}/-
-                                            </td>
-                                            <td className="text-center border px-1 py-1">
-                                                {ele.advance}/-
                                             </td>
                                             <td className="text-center border px-1 py-1">
                                                 {ele.food}/-
                                             </td>
                                             <td className="text-center border px-1 py-1">
-                                                {ele.travelling}/-
+                                                {ele.time}
                                             </td>
                                             <td className="text-center border px-1 py-1">
-                                                {ele.balance}/-
+                                                {ele.remarks}
+                                            </td>
+                                            <td className="text-center border px-1 py-1">
+                                                {ele.marked_by}
+                                            </td>
+                                            <td className="text-center border px-1 py-1">
+                                                <Link state={{ values: ele }} to="/editcash" className="font-medium text-fix hover:underline">Edit</Link>
                                             </td>
 
-                                        </tr>
-
-
-                                    )
-
-
+                                        </tr>)
                             }
+
 
 
 
@@ -278,4 +295,4 @@ const ReportMonthly = () => {
     )
 }
 
-export default ReportMonthly
+export default ReportCashLabour
