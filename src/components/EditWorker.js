@@ -137,6 +137,7 @@ const EditWorker = () => {
                                 <option>Plaster Mason</option>
                                 <option>Polish Mason</option>
                                 <option>Supervisor</option>
+                                <option>Office Staff</option>
                             </select>
 
                         </div>

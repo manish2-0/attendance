@@ -12,6 +12,7 @@ const Testing1 = () => {
     const [delay, setdelay] = useState(0);
     const [overtime, setovertime] = useState(0);
     const [undertime, setundertime] = useState(0);
+    const [totaltime, settotaltime] = useState(0);
 
 
 
@@ -77,8 +78,6 @@ const Testing1 = () => {
     const submitform = (e) => {
         e.preventDefault();
 
-        // console.log(time1[0])
-        // console.log(time2[0])
 
         if (time1 == "" || time2 == "") {
             setresponse("Please select both times");
@@ -106,8 +105,23 @@ const Testing1 = () => {
                 setovertime(0);
                 setundertime(0);
 
-            }
+                let p = 1;
+                let d = 0;
+                let o = 0;
+                let u = 0;
 
+
+                // let tot = ((parseFloat(p).toFixed(2)) + ((parseFloat(o).toFixed(2) / parseFloat(36).toFixed(2)).toFixed(2)) - ((parseFloat(d) / parseFloat(18)).toFixed(2)) - ((parseFloat(u).toFixed(2) / parseFloat(18).toFixed(2)).toFixed(2))).toFixed(2);
+                // console.log(parseFloat(p).toFixed(2))
+                // console.log(((parseFloat(o) / parseFloat(36)).toFixed(2)))
+                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) + parseFloat((u / 18));
+
+                console.log(tot)
+
+                // console.log(tot);
+                settotaltime(1);
+
+            }
 
             if ((time2[0] == 19 && time2[1] >= 31) || (time2[0] >= 20 && time2[1] >= 0 && time2[1] <= 59))  //Outtime condition 2 (overtime)
             {
@@ -123,6 +137,14 @@ const Testing1 = () => {
                 setdelay(0);
                 setundertime(0);
 
+                let p = 1;
+                let d = 0;
+                let o = a;
+                let u = 0;
+
+
+                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) + parseFloat((u / 18));
+                console.log(tot)
 
             }
 
@@ -148,6 +170,15 @@ const Testing1 = () => {
 
                 setovertime(0);
                 setdelay(0);
+
+                let p = 1;
+                let d = 0;
+                let o = 0;
+                let u = final;
+
+
+                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) + parseFloat((u / 18));
+                console.log(tot)
 
             }
         }
@@ -177,12 +208,25 @@ const Testing1 = () => {
 
             setdelay(final);
 
+            let d = final;
+
+
+
 
             if ((time2[0] == 18 && time2[1] >= 30) || (time2[0] == 19 && time2[1] <= 30))   //Outtime condition 1 (normal time)
             {
                 setpresent(1);
                 setovertime(0);
                 setundertime(0);
+
+                let p = 1;
+
+                let o = 0;
+                let u = 0;
+
+
+                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) + parseFloat((u / 18));
+                console.log(tot)
             }
 
             if ((time2[0] == 19 && time2[1] >= 30) || (time2[0] >= 20 && time2[1] >= 0 && time2[1] <= 59))  //Outtime condition 2 (overtime)
@@ -195,6 +239,15 @@ const Testing1 = () => {
                 setovertime(a);
 
                 setundertime(0);
+
+                let p = 1;
+
+                let o = a;
+                let u = 0;
+
+
+                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) + parseFloat((u / 18));
+                console.log(tot)
             }
 
 
@@ -220,8 +273,19 @@ const Testing1 = () => {
 
                 setovertime(0);
 
+                let p = 1;
+
+                let o = 0;
+                let u = final;
+
+
+                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) + parseFloat((u / 18));
+                console.log(tot)
+
             }
         }
+
+
 
 
     }
