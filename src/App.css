@@ -262,3 +262,109 @@
   -webkit-animation: spin .8s linear infinite;
   animation: spin .8s linear infinite;
 }
+
+/* Print */
+@media print {
+  /* #generatebill {
+    page-break-inside: avoid;
+    size: A4 portrait;
+    zoom: 70%;
+    font-size: 50pt;
+    padding: 0;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  } */
+
+  #report {
+    /* page-break-inside: avoid; */
+    size: A4 landscape;
+    zoom: 100%;
+    height: 100%;
+    width: 100%;
+    /* font-size: 50pt; */
+    padding: 0;
+    margin-top: 0;
+
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  #formhide {
+    display: none;
+  }
+
+
+  #extrabox {
+    padding: 0%;
+    margin: 0%;
+  }
+
+  #report1 {
+    /* page-break-inside: avoid; */
+    size: A4 landscape;
+    zoom: 100%;
+    height: 100%;
+    width: 100%;
+    /* font-size: 50pt; */
+    padding: 0;
+    margin-top: 0;
+
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  #formhide1 {
+    display: none;
+  }
+
+
+  #extrabox1 {
+    padding: 0%;
+    margin: 0%;
+  }
+
+
+
+
+  #hideedit1 {
+    display: none;
+  }
+  #hideedit {
+    display: none;
+  }
+  #navbarprivate {
+    display: none;
+  }
+
+
+  /*
+
+  #but-1 {
+    display: none;
+  }
+
+  #but-2 {
+    display: none;
+  }
+
+  #printbutton {
+    display: none;
+  }
+
+  #billbook {
+    padding: 0;
+  }
+
+  #printdate {
+    display: block;
+  }
+
+  #report {
+
+    padding: 0;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  } */
+
+
+}

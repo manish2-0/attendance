@@ -13,6 +13,13 @@ const ReportMonthly = () => {
     const [data, setdata] = useState([]);
     const [temp, settemp] = useState([]);
 
+    const [totalbalance, settotalbalance] = useState(0);
+    const [totalactual, settotalactual] = useState(0);
+    const [totalfood, settotalfood] = useState(0);
+    const [totaltravelling, settotaltravelling] = useState(0);
+    const [totaladvance, settotaladvance] = useState(0);
+
+
     const api = useAxiosPrivate();
 
     const [inputs, setinputs] = useState({
@@ -84,7 +91,19 @@ const ReportMonthly = () => {
         }
     }
 
+    const printwindow = async (e) => {
+        e.preventDefault();
+        window.print();
+    }
+
     useEffect(() => {
+
+        let tmpactual = 0;
+        let tmpfood = 0;
+        let tmptravelling = 0;
+        let tmpbalance = 0;
+        let tmpadvance = 0;
+
 
         for (let i = 0; i < temp.length; i++) {
 
@@ -117,9 +136,23 @@ const ReportMonthly = () => {
 
             setdata(val => [...val, { "name": name, "er_no": er_no, "rate": rate, "atte": atte, "total": tot, "advance": adv, "food": food, "travelling": travel, "balance": bal }])
 
+            tmpactual = tmpactual + parseInt(tot);
+            tmpfood = tmpfood + parseInt(food);
+            tmptravelling = tmptravelling + parseInt(travel);
+            tmpadvance = tmpadvance + parseInt(adv);
+            tmpbalance = tmpbalance + parseInt(bal);
+
             i = i + count - 1;
 
+
+
         }
+
+        settotalactual(tmpactual);
+        settotalfood(tmpfood);
+        settotaltravelling(tmptravelling);
+        settotaladvance(tmpadvance);
+        settotalbalance(tmpbalance);
 
     }, [temp]);
 
@@ -141,12 +174,12 @@ const ReportMonthly = () => {
             }
 
 
-            <div className='px-2 pt-20'>
+            <div id='extrabox' className='px-2 pt-20'>
 
                 <div className=' md:w-[700px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1400px] mx-auto'>
                     <h1 className='text-2xl text-fix'>Generate Report</h1>
 
-                    <div className='flex flex-wrap flex-row'>
+                    <div id='formhide' className='flex flex-wrap flex-row'>
                         <form onSubmit={submitform}>
 
                             <div className='flex flex-wrap flex-row mb-2'>
@@ -163,19 +196,25 @@ const ReportMonthly = () => {
 
                             </div>
 
-                            <button class="bg-fix hover:bg-blue-800 text-white font-bold py-1 px-5 rounded mb-1 mt-1">
+                            <button class="bg-fix hover:bg-blue-800 text-white font-bold py-1 px-5 rounded mb-1 mt-1 mr-2">
                                 Get
+                            </button>
+
+                            <button onClick={printwindow} class="bg-fix hover:bg-blue-800 text-white font-bold py-1 px-5 rounded mb-1 mt-1">
+                                Print
                             </button>
 
                         </form>
 
+
+
                     </div>
 
-                    <h1 className='text-lg text-slate-600'> <span className='underline underline-offset-2 text-fix'>Montly Attendance:</span> {inputs.month},{inputs.year}</h1>
+                    <h1 className='text-lg text-slate-600'> <span className='underline underline-offset-2 text-fix'>Attendance:</span> {moment(inputs.from).format("DD-MM-YYYY")} to {moment(inputs.to).format("DD-MM-YYYY")}</h1>
 
                 </div>
 
-                <div className="relative overflow-x-auto scrollbar-hide">
+                <div id='report' className="relative overflow-x-auto scrollbar-hide">
                     <table className="container w-auto md:w-[700px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1400px] m-1 mx-auto text-left text-gray-500 border shadow">
                         <thead className="text-white border-b border-gray-300 bg-fix">
                             <tr className='text-sm '>
@@ -263,9 +302,46 @@ const ReportMonthly = () => {
 
                                     )
 
-
                             }
 
+                            {
+                                data.length != 0
+                                    ? <>
+                                        <tr className="bg-white border-b hover:bg-gray-50 text-base">
+                                            <td colSpan={10} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                                <span className='text-fix'>Total Actual Amount:</span> {totalactual}/-
+                                            </td>
+                                        </tr>
+
+                                        <tr className="bg-white border-b hover:bg-gray-50 text-base">
+                                            <td colSpan={10} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                                <span className='text-fix'>Total Advance Amount:</span> {totaladvance}/-
+                                            </td>
+                                        </tr>
+
+
+                                        <tr className="bg-white border-b hover:bg-gray-50 text-base">
+                                            <td colSpan={10} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                                <span className='text-fix'>Total Food Amount:</span> {totalfood}/-
+                                            </td>
+                                        </tr>
+
+                                        <tr className="bg-white border-b hover:bg-gray-50 text-base">
+                                            <td colSpan={10} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                                <span className='text-fix'>Total Travelling Amount:</span> {totaltravelling}/-
+                                            </td>
+                                        </tr>
+
+
+                                        <tr className="bg-white border-b hover:bg-gray-50 text-base">
+                                            <td colSpan={10} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                                <span className='text-fix'>Total Balance Amount:</span> {totalbalance}/-
+                                            </td>
+                                        </tr>
+
+                                    </>
+                                    : <></>
+                            }
 
 
 

@@ -116,6 +116,11 @@ const ReportCashLabour = () => {
         }
     }
 
+    const printwindow = async (e) => {
+        e.preventDefault();
+        window.print();
+    }
+
     useEffect(() => {
         getpendingsites();
     }, []);
@@ -138,12 +143,12 @@ const ReportCashLabour = () => {
             }
 
 
-            <div className='px-2 pt-20'>
+            <div id='extrabox1' className='px-2 pt-20'>
 
                 <div className=' md:w-[700px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1400px] mx-auto'>
                     <h1 className='text-2xl text-fix underline underline-offset-2 mb-2'>Cash Labour Report</h1>
 
-                    <div className='flex flex-wrap flex-row'>
+                    <div id='formhide1' className='flex flex-wrap flex-row'>
                         <form onSubmit={submitform}>
 
                             <div className='flex flex-wrap flex-row mb-2'>
@@ -166,8 +171,8 @@ const ReportCashLabour = () => {
                                         <option selected className=''>Show All</option>
                                         {
                                             sites.map((val) =>
-                                                    <option value={val.site_code}>{val.site_code}-{val.site_name}</option>
-                                                )
+                                                <option value={val.site_code}>{val.site_code}-{val.site_name}</option>
+                                            )
                                         }
                                     </select>
                                 </div>
@@ -175,19 +180,23 @@ const ReportCashLabour = () => {
 
                             </div>
 
-                            <button class="bg-fix hover:bg-blue-800 text-white font-bold py-1 px-5 rounded mb-1 mt-1">
+                            <button class="bg-fix hover:bg-blue-800 text-white font-bold py-1 px-5 rounded mb-1 mt-1 mr-2">
                                 Get
+                            </button>
+
+                            <button onClick={printwindow} class="bg-fix hover:bg-blue-800 text-white font-bold py-1 px-5 rounded mb-1 mt-1">
+                                Print
                             </button>
 
                         </form>
 
                     </div>
 
-                    <h1 className='text-lg text-slate-600'> <span className='underline underline-offset-2 text-fix'>Montly Attendance:</span> January,2023</h1>
+                    <h1 className='text-lg text-slate-600'> <span className='underline underline-offset-2 text-fix'>Attendance:</span> {moment(inputs.from).format("DD-MM-YYYY")} to {moment(inputs.to).format("DD-MM-YYYY")}</h1>
 
                 </div>
 
-                <div className="relative overflow-x-auto scrollbar-hide">
+                <div id='report1' className="relative overflow-x-auto scrollbar-hide">
                     <table className="container w-auto md:w-[700px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1400px] m-1 mx-auto text-left text-gray-500 border shadow">
                         <thead className="text-white border-b border-gray-300 bg-fix">
                             <tr className='text-sm '>
@@ -221,7 +230,7 @@ const ReportCashLabour = () => {
                                 <th scope="col" className="text-center border px-3 py-1 whitespace-nowrap">
                                     Marked By
                                 </th>
-                                <th scope="col" className="text-center border px-1 py-1 whitespace-nowrap">
+                                <th id='hideedit' scope="col" className="text-center border px-1 py-1 whitespace-nowrap">
                                     Edit
                                 </th>
 
@@ -275,7 +284,7 @@ const ReportCashLabour = () => {
                                             <td className="text-center border px-1 py-1">
                                                 {ele.marked_by}
                                             </td>
-                                            <td className="text-center border px-1 py-1">
+                                            <td id='hideedit1' className="text-center border px-1 py-1">
                                                 <Link state={{ values: ele }} to="/editcash" className="font-medium text-fix hover:underline">Edit</Link>
                                             </td>
 

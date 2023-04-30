@@ -114,7 +114,7 @@ const Testing1 = () => {
                 // let tot = ((parseFloat(p).toFixed(2)) + ((parseFloat(o).toFixed(2) / parseFloat(36).toFixed(2)).toFixed(2)) - ((parseFloat(d) / parseFloat(18)).toFixed(2)) - ((parseFloat(u).toFixed(2) / parseFloat(18).toFixed(2)).toFixed(2))).toFixed(2);
                 // console.log(parseFloat(p).toFixed(2))
                 // console.log(((parseFloat(o) / parseFloat(36)).toFixed(2)))
-                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) + parseFloat((u / 18));
+                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) - parseFloat((u / 18));
 
                 console.log(tot)
 
@@ -143,7 +143,7 @@ const Testing1 = () => {
                 let u = 0;
 
 
-                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) + parseFloat((u / 18));
+                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) - parseFloat((u / 18));
                 console.log(tot)
 
             }
@@ -177,7 +177,7 @@ const Testing1 = () => {
                 let u = final;
 
 
-                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) + parseFloat((u / 18));
+                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) - parseFloat((u / 18));
                 console.log(tot)
 
             }
@@ -225,7 +225,7 @@ const Testing1 = () => {
                 let u = 0;
 
 
-                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) + parseFloat((u / 18));
+                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) - parseFloat((u / 18));
                 console.log(tot)
             }
 
@@ -246,7 +246,7 @@ const Testing1 = () => {
                 let u = 0;
 
 
-                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) + parseFloat((u / 18));
+                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) - parseFloat((u / 18));
                 console.log(tot)
             }
 
@@ -279,7 +279,7 @@ const Testing1 = () => {
                 let u = final;
 
 
-                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) + parseFloat((u / 18));
+                let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) - parseFloat((u / 18));
                 console.log(tot)
 
             }
