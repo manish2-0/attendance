@@ -27,6 +27,8 @@ const ReportCashLabour = () => {
         "to": "-"
     });
 
+    const [tot, settot] = useState(0);
+
     const getpendingsites = () => {
         setloading(true);
 
@@ -50,6 +52,8 @@ const ReportCashLabour = () => {
 
 
     }
+
+
     const handlesite = async (e) => {
         e.preventDefault();
         const value = e.target.value;
@@ -120,6 +124,22 @@ const ReportCashLabour = () => {
         e.preventDefault();
         window.print();
     }
+
+    useEffect(() => {
+        let tot = 0;
+
+        data.filter((val) => {
+            return siteselected.site == "" || siteselected.site == "Show All"
+                ? val
+                : val.site_code == siteselected.site
+        }).map((ele) => {
+            tot = parseInt(tot) + parseInt(((parseFloat(ele.present) * parseInt(ele.rate)) + parseInt(ele.food)).toFixed(0));
+        })
+
+        settot(tot);
+
+
+    }, [data, siteselected]);
 
     useEffect(() => {
         getpendingsites();
@@ -221,6 +241,9 @@ const ReportCashLabour = () => {
                                 <th scope="col" className="text-center border px-1 py-1 whitespace-nowrap">
                                     Food
                                 </th>
+                                <th scope="col" className="text-center border px-1 py-1 whitespace-nowrap">
+                                    Total
+                                </th>
                                 <th scope="col" className="text-center border px-2 py-1 whitespace-nowrap">
                                     Time
                                 </th>
@@ -241,7 +264,7 @@ const ReportCashLabour = () => {
                             {
                                 data.length == 0
                                     ? <tr className="bg-white border-b hover:bg-gray-50 text-base">
-                                        <td colSpan={6} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                        <td colSpan={12} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
                                             No data found
                                         </td>
                                     </tr>
@@ -276,6 +299,9 @@ const ReportCashLabour = () => {
                                                 {ele.food}/-
                                             </td>
                                             <td className="text-center border px-1 py-1">
+                                                {((parseFloat(ele.present) * parseInt(ele.rate)) + parseInt(ele.food)).toFixed(0)}/-
+                                            </td>
+                                            <td className="text-center border px-1 py-1">
                                                 {ele.time}
                                             </td>
                                             <td className="text-center border px-1 py-1">
@@ -292,7 +318,16 @@ const ReportCashLabour = () => {
                             }
 
 
+                            {
+                                data.length != 0
+                                    ? <tr className="bg-white border-b hover:bg-gray-50 text-base">
+                                        <td colSpan={12} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                            <span className='text-fix'>Total Expenses:</span> {tot}/-
+                                        </td>
+                                    </tr>
+                                    : <></>
 
+                            }
 
 
                         </tbody>

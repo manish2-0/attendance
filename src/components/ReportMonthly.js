@@ -123,7 +123,7 @@ const ReportMonthly = () => {
                 adv = adv + parseInt(temp[i + count].advance);
                 food = food + parseInt(temp[i + count].food);
                 travel = travel + parseInt(temp[i + count].travelling);
-                atte = (parseFloat(atte) + parseFloat(temp[i + count].attendance)).toFixed(2);
+                atte = (parseFloat(atte) + parseFloat(temp[i + count].attendance)).toFixed(6);
 
                 count++;
             }
@@ -279,7 +279,7 @@ const ReportMonthly = () => {
                                                 {ele.rate}/-
                                             </td>
                                             <td className="text-center border px-1 py-1">
-                                                {ele.atte}
+                                                {parseFloat(ele.atte).toFixed(3)}
                                             </td>
                                             <td className="text-center border px-1 py-1">
                                                 {ele.total}/-

@@ -27,10 +27,10 @@ const AttendanceCard = ({ user }) => {
             adv = adv + parseInt(attendance[i].advance);
             food = food + parseInt(attendance[i].food);
             travel = travel + parseInt(attendance[i].travelling);
-            atte = (parseFloat(atte) + parseFloat(attendance[i].attendance)).toFixed(2);
+            atte = (parseFloat(atte) + parseFloat(attendance[i].attendance)).toFixed(6);
         }
 
-        bal = parseInt((parseFloat(atte).toFixed(2) * parseFloat(user.rate).toFixed(2)) - adv + food + travel);
+        bal = parseInt((parseFloat(atte).toFixed(6) * parseFloat(user.rate).toFixed(2)) - adv + food + travel);
 
         settemp({ "adv": adv, "food": food, "travel": travel, "atte": atte, "bal": bal });
     }, [attendance]);
