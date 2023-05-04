@@ -31,6 +31,7 @@ import ReportCashSupervisor from './components/ReportCashSupervisor';
 import CashAttendanceSupervisor from './components/CashAttendanceSupervisor';
 import EditCashLabour from './components/EditCashLabour';
 import SiteReport from './components/SiteReport';
+import Testing2 from './components/Testing2';
 
 function App() {
   return (
@@ -39,7 +40,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route path='login' element={<Login />} />
-            <Route path='testing' element={<Testing1 />} />
+            {/* <Route path='testing' element={<Testing1 />} /> */}
+            <Route path='testing' element={<Testing2 />} />
 
             <Route element={<PersistLogin />}>
               <Route element={<RequireAuth />}>

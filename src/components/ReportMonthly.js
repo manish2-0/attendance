@@ -19,6 +19,12 @@ const ReportMonthly = () => {
     const [totaltravelling, settotaltravelling] = useState(0);
     const [totaladvance, settotaladvance] = useState(0);
 
+    const [pf, setpf] = useState(0);
+    const [esic, setesic] = useState(0);
+    const [pt, setpt] = useState(0);
+
+
+
 
     const api = useAxiosPrivate();
 
@@ -104,6 +110,10 @@ const ReportMonthly = () => {
         let tmpbalance = 0;
         let tmpadvance = 0;
 
+        let tmppf = 0;
+        let tmpesic = 0;
+        let tmppt = 0;
+
 
         for (let i = 0; i < temp.length; i++) {
 
@@ -119,6 +129,8 @@ const ReportMonthly = () => {
             let bal = 0;
             let tot = 0;
 
+            // let bs=0;
+
             while ((i + count) < temp.length && temp[i].er_no == temp[i + count].er_no) {
                 adv = adv + parseInt(temp[i + count].advance);
                 food = food + parseInt(temp[i + count].food);
@@ -130,11 +142,48 @@ const ReportMonthly = () => {
 
             tot = rate * atte;
             tot = tot.toFixed();
-            bal = tot - adv + food + travel;
-            // console.log(tot);
-            // console.log(bal)
 
-            setdata(val => [...val, { "name": name, "er_no": er_no, "rate": rate, "atte": atte, "total": tot, "advance": adv, "food": food, "travelling": travel, "balance": bal }])
+            // console.log(tot);
+            // console.log(bal);
+
+            let actualtotal = 0;
+            actualtotal = parseInt(tot) + parseInt(food) + parseInt(travel);
+
+            // For PF
+            let perc = 0.12 * parseInt(actualtotal);
+            perc = perc.toFixed(0);
+            if (perc >= 1800) {
+                perc = 1800;
+                // setpf(1800);
+            }
+
+            // For ESIC
+            let es = 0;
+            if (rate <= 700) {
+                es = 0.0075 * parseInt(actualtotal);
+                es = es.toFixed(0);
+
+            }
+
+            // For PT 
+            let p = 0;
+            if (actualtotal > 7500 && actualtotal <= 10000) {
+                p = 175;
+
+            }
+            else if (actualtotal > 10000) {
+                p = 200;
+
+            }
+            else {
+                p = 0;
+
+            }
+
+            setdata(val => [...val, { "name": name, "er_no": er_no, "rate": rate, "atte": atte, "total": tot, "advance": adv, "food": food, "travelling": travel, "pf": perc, "esic": es, "pt": p, "balance": bal }])
+
+            bal = actualtotal - adv - perc - p - es;
+
 
             tmpactual = tmpactual + parseInt(tot);
             tmpfood = tmpfood + parseInt(food);
@@ -142,9 +191,11 @@ const ReportMonthly = () => {
             tmpadvance = tmpadvance + parseInt(adv);
             tmpbalance = tmpbalance + parseInt(bal);
 
+            tmppf = tmppf + parseInt(perc);
+            tmppt = tmppt + parseInt(p);
+            tmpesic = tmpesic + parseInt(es);
+
             i = i + count - 1;
-
-
 
         }
 
@@ -153,6 +204,12 @@ const ReportMonthly = () => {
         settotaltravelling(tmptravelling);
         settotaladvance(tmpadvance);
         settotalbalance(tmpbalance);
+
+        setesic(tmpesic);
+        setpf(tmppf);
+        setpt(tmppt);
+
+
 
     }, [temp]);
 
@@ -245,6 +302,15 @@ const ReportMonthly = () => {
                                 <th scope="col" className="text-center border px-1 py-1 whitespace-nowrap">
                                     Travelling
                                 </th>
+                                <th scope="col" className="text-center border px-2 py-1 whitespace-nowrap">
+                                    PF
+                                </th>
+                                <th scope="col" className="text-center border px-2 py-1 whitespace-nowrap">
+                                    ESIC
+                                </th>
+                                <th scope="col" className="text-center border px-2 py-1 whitespace-nowrap">
+                                    PT
+                                </th>
                                 <th scope="col" className="text-center border px-3 py-1 whitespace-nowrap">
                                     Balance
                                 </th>
@@ -294,6 +360,16 @@ const ReportMonthly = () => {
                                                 {ele.travelling}/-
                                             </td>
                                             <td className="text-center border px-1 py-1">
+                                                {ele.pf}/-
+                                            </td>
+                                            <td className="text-center border px-1 py-1">
+                                                {ele.esic}/-
+                                            </td>
+                                            <td className="text-center border px-1 py-1">
+                                                {ele.pt}/-
+                                            </td>
+
+                                            <td className="text-center border px-1 py-1">
                                                 {ele.balance}/-
                                             </td>
 
@@ -308,33 +384,48 @@ const ReportMonthly = () => {
                                 data.length != 0
                                     ? <>
                                         <tr className="bg-white border-b hover:bg-gray-50 text-base">
-                                            <td colSpan={10} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                            <td colSpan={13} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
                                                 <span className='text-fix'>Total Actual Amount:</span> {totalactual}/-
                                             </td>
                                         </tr>
 
                                         <tr className="bg-white border-b hover:bg-gray-50 text-base">
-                                            <td colSpan={10} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                            <td colSpan={13} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
                                                 <span className='text-fix'>Total Advance Amount:</span> {totaladvance}/-
                                             </td>
                                         </tr>
 
 
                                         <tr className="bg-white border-b hover:bg-gray-50 text-base">
-                                            <td colSpan={10} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                            <td colSpan={13} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
                                                 <span className='text-fix'>Total Food Amount:</span> {totalfood}/-
                                             </td>
                                         </tr>
 
                                         <tr className="bg-white border-b hover:bg-gray-50 text-base">
-                                            <td colSpan={10} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                            <td colSpan={13} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
                                                 <span className='text-fix'>Total Travelling Amount:</span> {totaltravelling}/-
+                                            </td>
+                                        </tr>
+                                        <tr className="bg-white border-b hover:bg-gray-50 text-base">
+                                            <td colSpan={13} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                                <span className='text-fix'>Total PF Amount:</span> {pf}/-
+                                            </td>
+                                        </tr>
+                                        <tr className="bg-white border-b hover:bg-gray-50 text-base">
+                                            <td colSpan={13} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                                <span className='text-fix'>Total ESIC Amount:</span> {esic}/-
+                                            </td>
+                                        </tr>
+                                        <tr className="bg-white border-b hover:bg-gray-50 text-base">
+                                            <td colSpan={13} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                                <span className='text-fix'>Total PT Amount:</span> {pt}/-
                                             </td>
                                         </tr>
 
 
                                         <tr className="bg-white border-b hover:bg-gray-50 text-base">
-                                            <td colSpan={10} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                            <td colSpan={13} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
                                                 <span className='text-fix'>Total Balance Amount:</span> {totalbalance}/-
                                             </td>
                                         </tr>
