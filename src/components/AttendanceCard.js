@@ -35,7 +35,11 @@ const AttendanceCard = ({ user }) => {
             atte = (parseFloat(atte) + parseFloat(attendance[i].attendance)).toFixed(6);
         }
 
-        actualtotal = parseInt((parseFloat(atte).toFixed(6) * parseFloat(user.rate).toFixed(2)) + food + travel);
+        let tot = 0;
+        tot = user.rate * atte;
+        tot = tot.toFixed();
+
+        actualtotal = parseInt(tot) + parseInt(food) + parseInt(travel);
 
         // For PF
         let perc = 0.12 * parseInt(actualtotal);
