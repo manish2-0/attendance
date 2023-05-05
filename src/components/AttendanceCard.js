@@ -22,6 +22,11 @@ const AttendanceCard = ({ user }) => {
         let travel = 0;
         let atte = 0.00;
         let bal = 0;
+        let actualtotal = 0;
+
+        let pf = 0;
+        let pt = 0;
+        let esic = 0;
 
         for (let i = 0; i < attendance.length; i++) {
             adv = adv + parseInt(attendance[i].advance);
@@ -30,9 +35,43 @@ const AttendanceCard = ({ user }) => {
             atte = (parseFloat(atte) + parseFloat(attendance[i].attendance)).toFixed(6);
         }
 
-        bal = parseInt((parseFloat(atte).toFixed(6) * parseFloat(user.rate).toFixed(2)) - adv + food + travel);
+        actualtotal = parseInt((parseFloat(atte).toFixed(6) * parseFloat(user.rate).toFixed(2)) + food + travel);
 
-        settemp({ "adv": adv, "food": food, "travel": travel, "atte": atte, "bal": bal });
+        // For PF
+        let perc = 0.12 * parseInt(actualtotal);
+        perc = perc.toFixed(0);
+        if (perc >= 1800) {
+            pf = 1800;
+            // setpf(1800);
+        }
+        else {
+            pf = perc;
+        }
+
+        // For ESIC
+        if (user.rate <= 700) {
+            esic = 0.0075 * parseInt(actualtotal);
+            esic = esic.toFixed(0);
+        }
+
+        // For PT 
+        if (actualtotal > 7500 && actualtotal <= 10000) {
+            pt = 175;
+
+        }
+        else if (actualtotal > 10000) {
+            pt = 200;
+
+        }
+        else {
+            pt = 0;
+
+        }
+
+
+        bal = parseInt(parseInt(actualtotal) - adv - pf - esic - pt);
+
+        settemp({ "adv": adv, "food": food, "travel": travel, "atte": atte, "bal": bal, "actual": actualtotal, "pf": pf, "esic": esic, "pt": pt });
     }, [attendance]);
 
 
@@ -153,7 +192,8 @@ const AttendanceCard = ({ user }) => {
                                 <span className='text-fix font-medium'> Total Food and Travelling:</span> {parseInt(temp.food) + parseInt(temp.travel)}/-
                             </td>
                         </tr>
-                        
+
+
                         <tr className='border p-1'>
                             <td colSpan={11} className='p-1 text-base'>
                                 <span className='text-fix font-medium'> Advance:</span> {temp.adv}/-
@@ -163,11 +203,28 @@ const AttendanceCard = ({ user }) => {
 
                         {
                             localStorage.getItem("role") == "Admin"
-                                ? <tr className='border p-1'>
-                                    <td colSpan={11} className='p-1 text-base'>
-                                        <span className='text-fix font-medium'> Total Balance:</span>{temp.bal}/-
-                                    </td>
-                                </tr>
+                                ?
+                                <>
+                                    <tr className='border p-1'>
+                                        <td colSpan={11} className='p-1 text-base'>
+                                            <span className='text-fix font-medium'> Total PF Amount:</span> {temp.pf}/-
+                                        </td>
+                                    </tr>
+                                    <tr className='border p-1'>
+                                        <td colSpan={11} className='p-1 text-base'>
+                                            <span className='text-fix font-medium'> Total ESIC Amount:</span> {temp.esic}/-
+                                        </td>
+                                    </tr>
+                                    <tr className='border p-1'>
+                                        <td colSpan={11} className='p-1 text-base'>
+                                            <span className='text-fix font-medium'> Total PT Amount:</span>{temp.pt}/-
+                                        </td>
+                                    </tr> <tr className='border p-1'>
+                                        <td colSpan={11} className='p-1 text-base'>
+                                            <span className='text-fix font-medium'> Total Balance:</span>{temp.bal}/-
+                                        </td>
+                                    </tr>
+                                </>
                                 : <></>
                         }
 
