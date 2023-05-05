@@ -69,7 +69,7 @@ const AttendanceCard = ({ user }) => {
         }
 
 
-        bal = parseInt(parseInt(actualtotal) - adv - pf - esic - pt);
+        bal = parseFloat(parseInt(actualtotal) - adv - pf - esic - pt).toFixed(0);
 
         settemp({ "adv": adv, "food": food, "travel": travel, "atte": atte, "bal": bal, "actual": actualtotal, "pf": pf, "esic": esic, "pt": pt });
     }, [attendance]);
