@@ -322,7 +322,7 @@ const AttendanceSupervisor = () => {
                     let o = 0;
                     let u = 0;
 
-                    let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) - parseFloat((u / 18));
+                    let tot = parseFloat(p) + parseFloat((o / 32)) - parseFloat((d / 18)) - parseFloat((u / 18));
 
                     setattendance(values => ({ ...values, "attendance": tot }))
 
@@ -340,7 +340,7 @@ const AttendanceSupervisor = () => {
                     let o = a;
                     let u = 0;
 
-                    let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) - parseFloat((u / 18));
+                    let tot = parseFloat(p) + parseFloat((o / 32)) - parseFloat((d / 18)) - parseFloat((u / 18));
                     console.log(tot)
                     setattendance(values => ({ ...values, "attendance": tot }))
                 }
@@ -368,7 +368,7 @@ const AttendanceSupervisor = () => {
                     let o = 0;
                     let u = final;
 
-                    let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) - parseFloat((u / 18));
+                    let tot = parseFloat(p) + parseFloat((o / 32)) - parseFloat((d / 18)) - parseFloat((u / 18));
                     setattendance(values => ({ ...values, "attendance": tot }))
 
                 }
@@ -406,7 +406,7 @@ const AttendanceSupervisor = () => {
                     let o = 0;
                     let u = 0;
 
-                    let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) - parseFloat((u / 18));
+                    let tot = parseFloat(p) + parseFloat((o / 32)) - parseFloat((d / 18)) - parseFloat((u / 18));
                     setattendance(values => ({ ...values, "attendance": tot }))
                 }
 
@@ -420,7 +420,7 @@ const AttendanceSupervisor = () => {
                     let o = a;
                     let u = 0;
 
-                    let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) - parseFloat((u / 18));
+                    let tot = parseFloat(p) + parseFloat((o / 32)) - parseFloat((d / 18)) - parseFloat((u / 18));
                     setattendance(values => ({ ...values, "attendance": tot }))
                 }
 
@@ -447,7 +447,7 @@ const AttendanceSupervisor = () => {
                     let o = 0;
                     let u = final;
 
-                    let tot = parseFloat(p) + parseFloat((o / 36)) - parseFloat((d / 18)) - parseFloat((u / 18));
+                    let tot = parseFloat(p) + parseFloat((o / 32)) - parseFloat((d / 18)) - parseFloat((u / 18));
                     setattendance(values => ({ ...values, "attendance": tot }))
 
                 }
