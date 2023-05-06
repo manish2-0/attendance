@@ -143,6 +143,28 @@ const EditWorker = () => {
                         </div>
 
                         <div className='flex flex-wrap md:flex-nowrap w-full items-center mb-4'>
+                            <label className='text-lg min-w-fit pr-2 text-gray-900' htmlFor="">PF:</label>
+                            <select onChange={handlechange} defaultValue={data.pf} name="pf" className="w-fit px-2 py-2 text-lg text-black bg-transparent border-2 border-slate-300 rounded-sm outline-none" >
+                                <option>Yes</option>
+                                <option >No</option>
+                            </select>
+                        </div>
+                        <div className='flex flex-wrap md:flex-nowrap w-full items-center mb-4'>
+                            <label className='text-lg min-w-fit pr-2 text-gray-900' htmlFor="">ESIC:</label>
+                            <select onChange={handlechange} defaultValue={data.esic} name="esic" className="w-fit px-2 py-2 text-lg text-black bg-transparent border-2 border-slate-300 rounded-sm outline-none" >
+                                <option>Yes</option>
+                                <option >No</option>
+                            </select>
+                        </div>
+                        <div className='flex flex-wrap md:flex-nowrap w-full items-center mb-4'>
+                            <label className='text-lg min-w-fit pr-2 text-gray-900' htmlFor="">PT:</label>
+                            <select onChange={handlechange} defaultValue={data.pt} name="pt" className="w-fit px-2 py-2 text-lg text-black bg-transparent border-2 border-slate-300 rounded-sm outline-none" >
+                                <option>Yes</option>
+                                <option >No</option>
+                            </select>
+                        </div>
+
+                        <div className='flex flex-wrap md:flex-nowrap w-full items-center mb-4'>
                             <label className='text-lg min-w-fit pr-2 text-gray-900' htmlFor="">Address:</label>
                             <input onChange={handlechange} defaultValue={data.address} name="address" className='w-full px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="text" placeholder='Address' />
                         </div>

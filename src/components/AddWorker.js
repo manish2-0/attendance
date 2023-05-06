@@ -35,6 +35,11 @@ const AddWorker = () => {
     "third_person": "-",
     "supervisor": "-",
 
+    "pf": "No",
+    "esic": "No",
+    "pt": "No",
+
+
     "doj": "-",
     "dob": "-",
 
@@ -162,6 +167,37 @@ const AddWorker = () => {
                 <option>Office Staff</option>
               </select>
             </div>
+
+            <div className='flex flex-wrap md:flex-nowrap w-full items-center mb-4'>
+              <label className='text-lg min-w-fit pr-2 text-gray-900' htmlFor="">PF:</label>
+              <select onChange={handlechange} name="pf" className="w-fit px-2 py-2 text-lg text-black bg-transparent border-2 border-slate-300 rounded-sm outline-none" >
+                <option>Yes</option>
+                <option selected>No</option>
+              </select>
+            </div>
+            <div className='flex flex-wrap md:flex-nowrap w-full items-center mb-4'>
+              <label className='text-lg min-w-fit pr-2 text-gray-900' htmlFor="">ESIC:</label>
+              <select onChange={handlechange} name="esic" className="w-fit px-2 py-2 text-lg text-black bg-transparent border-2 border-slate-300 rounded-sm outline-none" >
+                <option>Yes</option>
+                <option selected>No</option>
+              </select>
+            </div>
+            <div className='flex flex-wrap md:flex-nowrap w-full items-center mb-4'>
+              <label className='text-lg min-w-fit pr-2 text-gray-900' htmlFor="">PT:</label>
+              <select onChange={handlechange} name="pt" className="w-fit px-2 py-2 text-lg text-black bg-transparent border-2 border-slate-300 rounded-sm outline-none" >
+                <option>Yes</option>
+                <option selected>No</option>
+              </select>
+            </div>
+
+            {/* <div className='flex flex-wrap md:flex-nowrap w-full items-center mb-4'>
+              <label className='text-lg min-w-fit pr-2 text-gray-900' htmlFor="">PF:</label>
+              <input type="radio" id="pf" name="pf" value="Yes" />
+              <label for="pf">Yes</label>
+              <input type="radio" id="pf1" name="pf" value="No" />
+              <label for="pf2">No</label>
+
+            </div> */}
 
             <div className='flex flex-wrap md:flex-nowrap w-full items-center mb-4'>
               <label className='text-lg min-w-fit pr-2 text-gray-900' htmlFor="">Address:</label>

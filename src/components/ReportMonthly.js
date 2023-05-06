@@ -122,6 +122,10 @@ const ReportMonthly = () => {
             let er_no = temp[i].er_no;
             let rate = temp[i].rate;
 
+            let datapf = temp[i].pf;
+            let dataesic = temp[i].esic;
+            let datapt = temp[i].pt;
+
             let adv = 0;
             let food = 0;
             let travel = 0;
@@ -150,35 +154,52 @@ const ReportMonthly = () => {
             actualtotal = parseInt(tot) + parseInt(food) + parseInt(travel);
 
             // For PF
-            let perc = 0.12 * parseInt(actualtotal);
-            perc = perc.toFixed(0);
-            if (perc >= 1800) {
-                perc = 1800;
-                // setpf(1800);
+            let perc = 0;
+
+            if (datapf == "Yes") {
+                perc = 0.12 * parseInt(actualtotal);
+                perc = perc.toFixed(0);
+                if (perc >= 1800) {
+                    perc = 1800;
+                    // setpf(1800);
+                }
             }
+            else {
+                perc = 0;
+            }
+
 
             // For ESIC
             let es = 0;
-            if (rate <= 700) {
-                es = 0.0075 * parseInt(actualtotal);
-                es = es.toFixed(0);
+            if (dataesic == "Yes") {
+                if (rate <= 700) {
+                    es = 0.0075 * parseInt(actualtotal);
+                    es = es.toFixed(0);
 
+                }
             }
+            else {
+                es = 0;
+            }
+
 
             // For PT 
             let p = 0;
-            if (actualtotal > 7500 && actualtotal <= 10000) {
-                p = 175;
-
-            }
-            else if (actualtotal > 10000) {
-                p = 200;
-
+            if (datapt == "Yes") {
+                if (actualtotal > 7500 && actualtotal <= 10000) {
+                    p = 175;
+                }
+                else if (actualtotal > 10000) {
+                    p = 200;
+                }
+                else {
+                    p = 0;
+                }
             }
             else {
                 p = 0;
-
             }
+
 
             setdata(val => [...val, { "name": name, "er_no": er_no, "rate": rate, "atte": atte, "total": tot, "advance": adv, "food": food, "travelling": travel, "pf": perc, "esic": es, "pt": p, "balance": bal }])
 

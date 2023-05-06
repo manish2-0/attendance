@@ -128,6 +128,18 @@ const WorkerInformation = ({ user }) => {
                             <h1 className='text-fix pr-1'>Designation:</h1>
                             <p >{user.designation}</p>
                         </div>
+                        <div className='flex'>
+                            <h1 className='text-fix pr-1'>PF:</h1>
+                            <p >{user.pf}</p>
+                        </div>
+                        <div className='flex'>
+                            <h1 className='text-fix pr-1'>ESIC:</h1>
+                            <p >{user.esic}</p>
+                        </div>
+                        <div className='flex'>
+                            <h1 className='text-fix pr-1'>PT:</h1>
+                            <p >{user.pt}</p>
+                        </div>
 
                     </div>
 
