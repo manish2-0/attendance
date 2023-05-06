@@ -42,34 +42,51 @@ const AttendanceCard = ({ user }) => {
         actualtotal = parseInt(tot) + parseInt(food) + parseInt(travel);
 
         // For PF
-        let perc = 0.12 * parseInt(actualtotal);
-        perc = perc.toFixed(0);
-        if (perc >= 1800) {
-            pf = 1800;
-            // setpf(1800);
+        if (user.pf == "Yes") {
+            let perc = 0;
+            perc = 0.12 * parseInt(actualtotal);
+            perc = perc.toFixed(0);
+            if (perc >= 1800) {
+                pf = 1800;
+                // setpf(1800);
+            }
+            else {
+                pf = perc;
+            }
+
         }
         else {
-            pf = perc;
+            pf = 0;
         }
+
 
         // For ESIC
-        if (user.rate <= 700) {
-            esic = 0.0075 * parseInt(actualtotal);
-            esic = esic.toFixed(0);
+        if (user.esic == "Yes") {
+            if (user.rate <= 700) {
+                esic = 0.0075 * parseInt(actualtotal);
+                esic = esic.toFixed(0);
+            }
+
         }
+        else {
+            esic = 0;
+        }
+
 
         // For PT 
-        if (actualtotal > 7500 && actualtotal <= 10000) {
-            pt = 175;
-
-        }
-        else if (actualtotal > 10000) {
-            pt = 200;
-
+        if (user.pt == "Yes") {
+            if (actualtotal > 7500 && actualtotal <= 10000) {
+                pt = 175;
+            }
+            else if (actualtotal > 10000) {
+                pt = 200;
+            }
+            else {
+                pt = 0;
+            }
         }
         else {
             pt = 0;
-
         }
 
 
