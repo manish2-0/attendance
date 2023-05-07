@@ -191,7 +191,7 @@ const AttendanceCard = ({ user }) => {
                                     {
                                         localStorage.getItem("role") == "Admin"
                                             ? <td className="text-center text-red-600 border px-3 py-1 whitespace-nowrap hover:underline underline-offset-2 cursor-pointer ">
-                                                <Link to="/editattendance" state={{ values: ele }}>Edit</Link>
+                                                <Link to="/editattendance" state={{ values: ele, personinformation: user }}>Edit</Link>
                                             </td>
                                             : <></>
                                     }
