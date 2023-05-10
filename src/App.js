@@ -32,6 +32,7 @@ import CashAttendanceSupervisor from './components/CashAttendanceSupervisor';
 import EditCashLabour from './components/EditCashLabour';
 import SiteReport from './components/SiteReport';
 import Testing2 from './components/Testing2';
+import PfReport from './components/PfReport';
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
                 <Route path='editattendance' element={<EditAttendance />} />
                 <Route path='report' element={<ReportMonthly />} />
                 <Route path='reportsite' element={<SiteReport />} />
+                <Route path='reportpf' element={<PfReport />} />
                 <Route path='navbar' element={<Navbar />} />
 
                 <Route path='dailyattendance' element={<ViewDailyAttendance />} />
