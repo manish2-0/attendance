@@ -219,7 +219,7 @@ const EditAttendance = () => {
                 let t = time1[0] + ":" + time1[1] + " to " + time2[0] + ":" + time2[1];
                 setdata(values => ({ ...values, "time": t }))
 
-                if ((time2[0] == 18 && time2[1] >= 30) || (time2[0] == 19 && time2[1] <= 30)) {       //Outtime condition 1 (normal time)
+                if ((time2[0] == 18 && time2[1] >= 25) || (time2[0] == 19 && time2[1] <= 30)) {       //Outtime condition 1 (normal time)
 
                     let p = 1;
                     let d = 0;
@@ -303,7 +303,7 @@ const EditAttendance = () => {
 
 
 
-                if ((time2[0] == 18 && time2[1] >= 30) || (time2[0] == 19 && time2[1] <= 30))   //Outtime condition 1 (normal time)
+                if ((time2[0] == 18 && time2[1] >= 25) || (time2[0] == 19 && time2[1] <= 30))   //Outtime condition 1 (normal time)
                 {
 
                     let p = 1;

@@ -326,7 +326,7 @@ const AttendanceAdmin = () => {
                 let t = time1[0] + ":" + time1[1] + " to " + time2[0] + ":" + time2[1];
                 setattendance(values => ({ ...values, "time": t }))
 
-                if ((time2[0] == 18 && time2[1] >= 30) || (time2[0] == 19 && time2[1] <= 30)) {       //Outtime condition 1 (normal time)
+                if ((time2[0] == 18 && time2[1] >= 25) || (time2[0] == 19 && time2[1] <= 30)) {       //Outtime condition 1 (normal time)
 
                     let p = 1;
                     let d = 0;
@@ -410,7 +410,7 @@ const AttendanceAdmin = () => {
 
 
 
-                if ((time2[0] == 18 && time2[1] >= 30) || (time2[0] == 19 && time2[1] <= 30))   //Outtime condition 1 (normal time)
+                if ((time2[0] == 18 && time2[1] >= 25) || (time2[0] == 19 && time2[1] <= 30))   //Outtime condition 1 (normal time)
                 {
 
                     let p = 1;
