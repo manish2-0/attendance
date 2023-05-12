@@ -210,6 +210,14 @@ const AttendanceSupervisor = () => {
         // console.log(attendance)
 
         if (data[0].designation == "Office Staff") {
+
+            var today = new Date();
+            var hrs = today.getHours();
+            var min = today.getMinutes();
+
+            // console.log(hrs)
+            // console.log(min)
+
             if (time1 == "" || time2 == "") {
                 setloading(false);
                 setmodal(true);
@@ -221,6 +229,16 @@ const AttendanceSupervisor = () => {
             }
 
             if (time1[0] > time2[0]) {
+                setloading(false);
+                setmodal(true);
+                await setmodalmessage({
+                    "text1": "Error",
+                    "text2": "Please enter a valid time."
+                });
+                return 0;
+            }
+
+            if ((time2[0] > hrs) || (time2[0] == hrs && time2[1] > min)) {
                 setloading(false);
                 setmodal(true);
                 await setmodalmessage({
