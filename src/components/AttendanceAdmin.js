@@ -356,7 +356,7 @@ const AttendanceAdmin = () => {
                     setattendance(values => ({ ...values, "attendance": tot }))
                 }
 
-                if ((time2[0] <= 18 && time2[1] <= 29) || (time2[0] < 18 && time2[1] <= 59 && time2[1] >= 0))  //Outtime condition 3 (undertime)
+                if ((time2[0] <= 18 && time2[1] < 25) || (time2[0] < 18 && time2[1] <= 59 && time2[1] >= 0))  //Outtime condition 3 (undertime)
                 {
 
                     let under = underworkinghours();
@@ -421,7 +421,7 @@ const AttendanceAdmin = () => {
                     setattendance(values => ({ ...values, "attendance": tot }))
                 }
 
-                if ((time2[0] == 19 && time2[1] >= 30) || (time2[0] >= 20 && time2[1] >= 0 && time2[1] <= 59))  //Outtime condition 2 (overtime)
+                if ((time2[0] == 19 && time2[1] >= 31) || (time2[0] >= 20 && time2[1] >= 0 && time2[1] <= 59))  //Outtime condition 2 (overtime)
                 {
                     let extra = extraworkinghours();
                     let extraminutes = extra[0] * 60 + extra[1];
@@ -436,7 +436,7 @@ const AttendanceAdmin = () => {
                 }
 
 
-                if ((time2[0] <= 18 && time2[1] <= 29) || (time2[0] < 18 && time2[1] <= 59 && time2[1] >= 0))  //Outtime condition 3 (undertime)
+                if ((time2[0] <= 18 && time2[1] < 25 ) || (time2[0] < 18 && time2[1] <= 59 && time2[1] >= 0))  //Outtime condition 3 (undertime)
                 {
 
                     let under = underworkinghours();
