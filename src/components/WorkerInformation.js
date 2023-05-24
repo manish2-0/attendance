@@ -154,7 +154,7 @@ const WorkerInformation = ({ user }) => {
                                         <p className='text-gray-600'>{user.rate}/-</p>
                                     </div>
 
-                                    <Link state={{ values: user }} to="/viewextra" class="bg-fix hover:bg-blue-800 text-white font-medium py-1 px-5 rounded my-">
+                                    <Link state={{ values: user }} to="/viewextra" className="bg-fix hover:bg-blue-800 text-white font-medium py-1 px-5 rounded my-">
                                         More Information...
                                     </Link>
 

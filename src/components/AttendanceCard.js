@@ -102,6 +102,11 @@ const AttendanceCard = ({ user }) => {
 
             <p className='text-fix'>Attendance for: {data.month},{data.year}</p>
 
+            {/* <div className='flex'>
+                <button class="bg-fix hover:bg-blue-800 text-white font-medium py-1 px-5 rounded my-1">Print</button>
+                <Link state={{ data: temp, personal: user, month: data.month, year: data.year }} to="/payslip" className="bg-fix hover:bg-blue-800 text-white font-medium py-1 px-5 rounded my-1 ml-2">Pay Slip</Link>
+            </div> */}
+
             <div className="relative overflow-x-auto scrollbar-hide">
 
 

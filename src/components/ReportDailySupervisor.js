@@ -3,6 +3,8 @@ import Loader from './Loader';
 import Modal from '../modals/Modal';
 import useModal from '../hooks/useModal';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import moment from 'moment';
 
 const ReportDailySupervisor = () => {
 
@@ -15,6 +17,9 @@ const ReportDailySupervisor = () => {
   const api = useAxiosPrivate();
 
   const [inputs, setinputs] = useState({
+    "date": "-"
+  });
+  const [final, setfinal] = useState({
     "date": "-"
   });
 
@@ -33,6 +38,7 @@ const ReportDailySupervisor = () => {
   const submitform = async (e) => {
     e.preventDefault();
     setdata([]);
+    setfinal(inputs)
     setloading(true);
 
     if (inputs.date == "") {
@@ -50,6 +56,7 @@ const ReportDailySupervisor = () => {
       await api.post('attendance/attendance-supervisor', JSON.stringify(inputs)).then(async function (response) {
         if (response?.data?.data) {
           setdata(response.data.data)
+          console.log(response.data.data)
           setloading(false);
           setmodal(true);
           await setmodalmessage({
@@ -122,7 +129,7 @@ const ReportDailySupervisor = () => {
 
           </div>
 
-          <h1 className='text-lg text-slate-600'> <span className='underline underline-offset-2 text-fix'>Daily Attendance:</span> {inputs.date}</h1>
+          <h1 className='text-lg text-slate-600'> <span className='underline underline-offset-2 text-fix'>Daily Attendance:</span> {moment(final.date).format("DD-MM-YYYY")}</h1>
 
         </div>
 
@@ -161,6 +168,15 @@ const ReportDailySupervisor = () => {
                   Remarks
                 </th>
 
+                {
+                  moment(final.date).format("YYYY-MM-DD") == moment().format("YYYY-MM-DD")
+                    ? <th scope="col" className="text-center border px-2 py-1 whitespace-nowrap">
+                      Edit
+                    </th>
+                    : <></>
+                }
+
+
 
               </tr>
             </thead>
@@ -188,14 +204,14 @@ const ReportDailySupervisor = () => {
                       <td className="text-center border px-2 py-1 whitespace-wrap">
                         {ele.name}
                       </td>
-                      
+
                       <td className="text-center border px-1 py-1">
                         {ele.site_code}
                       </td>
                       <td className="text-center border px-1 py-1">
                         {ele.attendance}
                       </td>
-                      
+
                       <td className="text-center border px-1 py-1">
                         {ele.advance}/-
                       </td>
@@ -211,6 +227,15 @@ const ReportDailySupervisor = () => {
                       <td className="text-center border px-2 py-1 whitespace-wrap">
                         {ele.remarks}
                       </td>
+
+                      {
+                        moment(final.date).format("YYYY-MM-DD") == moment().format("YYYY-MM-DD")
+                          ? <td className="text-center border px-1 py-1 text-red-600">
+                            <Link to="/editattendancesupervisor" state={{ values: ele }}>Edit</Link>
+                          </td>
+                          : <></>
+                      }
+
 
                     </tr>
 
