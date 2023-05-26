@@ -66,7 +66,7 @@ const PaySlip = () => {
                                         Total Days
                                     </td>
                                     <td className='text-center border-r'>
-                                        {parseFloat(data.atte).toFixed(2)}
+                                        {parseFloat(data.atte).toFixed(3)}
                                     </td>
                                 </tr>
 
