@@ -329,9 +329,11 @@
   #hideedit1 {
     display: none;
   }
+
   #hideedit {
     display: none;
   }
+
   #navbarprivate {
     display: none;
   }
@@ -367,4 +369,57 @@
   } */
 
 
+  #cardbutton {
+    display: none;
+  }
+
+  #cardremarksdata {
+    display: none;
+  }
+
+  #cardremarks {
+    display: none;
+  }
+
+  #cardmarkedbydata {
+    display: none;
+  }
+
+  #cardmarkedby {
+    display: none;
+  }
+
+  #cardeditdata {
+    display: none;
+  }
+
+  #cardedit {
+    display: none;
+  }
+
+  #cardtable {
+    width: 100%;
+  }
+
+  #workercard {
+    padding-top: 0;
+  }
+
+  #payslip {
+    padding-top: 0;
+  }
+
+  #payslipbutton {
+    display: none;
+  }
+
+  #payslipedited {
+    padding-top: 0;
+  }
+
+  #payslipeditedbutton {
+    display: none;
+  }
+
+  
 }

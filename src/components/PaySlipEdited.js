@@ -1,15 +1,57 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from '../logo.png';
 import { useLocation } from 'react-router-dom';
 
-const PaySlip = () => {
+const PaySlipEdited = () => {
 
     const location = useLocation();
     const { data, personal, month, year } = location.state;
 
+    const [calcu, setcalcu] = useState({
+        "actual": 0,
+        "basic": 0,
+        "da": 0,
+        "travel": 0,
+        "food": 0,
+        "other": 0,
+        "pf": 0,
+        "pt": 0,
+        "esic": 0,
+        "advance": 0,
+        "balance": 0
+    })
+
     useEffect(() => {
         console.log(data)
         console.log(personal)
+
+        let actual = parseInt(data.actual);
+        let basic = 0;
+        let da = 0;
+        let travel = 0;
+        let food = 0;
+        let other = 0;
+        let pf = 0;
+        let pt = 0;
+        let esic = 0;
+        let advance = 0;
+        let balance = 0;
+
+        basic = parseInt(0.5 * parseFloat(data.actual));
+        da = parseInt(0.3 * parseFloat(data.actual));
+        travel = parseInt(0.1 * parseFloat(data.actual));
+        food = parseInt(0.05 * parseFloat(data.actual));
+        other = data.actual - basic - da - travel - food;
+
+        pf = parseInt(data.pf);
+        pt = parseInt(data.pt);
+        esic = parseInt(data.esic);
+        advance = parseInt(data.adv);
+
+        balance = parseInt(data.actual) - advance - pf - pt - esic;
+
+        setcalcu({ "actual": actual, "basic": basic, "da": da, "travel": travel, "food": food, "other": other, "pf": pf, "pt": pt, "esic": esic, "advance": advance, "balance": balance });
+
     }, []);
 
     const printwindow = async (e) => {
@@ -18,13 +60,13 @@ const PaySlip = () => {
     }
 
     return (
-        <div className='px-2 pt-24' id='payslip'>
+        <div className='px-2 pt-24' id='payslipedited'>
 
             <div className=' md:w-[700px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1400px] relative mx-auto'>
                 <div className='rounded bg-fix h-20 w-full flex justify-center items-center relative'>
                     <img className='h-16 w-16 absolute left-0' srcSet={logo} />
                     <p className=' text-center text-white text-2xl'>
-                        Monthly Summary
+                        Pay Slip
                     </p>
                     <p className='h-full flex items-center absolute right-0 mr-3 text-white'>
                         {month},{year}
@@ -42,7 +84,7 @@ const PaySlip = () => {
                     <p className='text-lg'><span className='text-fix'>Bank Account: </span>{personal.acc_no}</p>
                     <p className='text-lg'><span className='text-fix'>IFSC: </span>{personal.ifsc}</p>
 
-                    <button id='payslipbutton' onClick={printwindow} class="bg-fix hover:bg-blue-800 text-white font-medium py-1 px-5 rounded my-1">Print</button>
+                    <button onClick={printwindow} id='payslipeditedbutton' class="bg-fix hover:bg-blue-800 text-white font-medium py-1 px-5 rounded my-1">Print</button>
 
                 </div>
 
@@ -63,28 +105,19 @@ const PaySlip = () => {
 
                                 <tr>
                                     <td className='text-center border-r'>
-                                        Total Days
+                                        Basic
                                     </td>
                                     <td className='text-center border-r'>
-                                        {parseFloat(data.atte).toFixed(2)}
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td className='text-center border-r'>
-                                        Rate
-                                    </td>
-                                    <td className='text-center border-r'>
-                                        {personal.rate}/-
+                                        {calcu.basic}/-
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td className='text-center border-r'>
-                                        Total Wages
+                                        DA
                                     </td>
                                     <td className='text-center border-r'>
-                                        {(parseInt(personal.rate) * parseFloat(data.atte).toFixed(2)).toFixed(0)}/-
+                                        {calcu.da}/-
                                     </td>
                                 </tr>
 
@@ -94,7 +127,7 @@ const PaySlip = () => {
                                     </td>
 
                                     <td className='text-center border-r'>
-                                        {data.travel}/-
+                                        {calcu.travel}/-
                                     </td>
                                 </tr>
 
@@ -105,7 +138,16 @@ const PaySlip = () => {
                                     </td>
 
                                     <td className='text-center border-r'>
-                                        {data.food}/-
+                                        {calcu.food}/-
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td className='text-center border-r'>
+                                        Others
+                                    </td>
+                                    <td className='text-center border-r'>
+                                        {calcu.other}/-
                                     </td>
                                 </tr>
 
@@ -195,7 +237,7 @@ const PaySlip = () => {
                                 </td>
 
                                 <td className='text-center border-r'>
-                                    {data.pt}/-
+                                    {calcu.pt}/-
                                 </td>
 
                             </tr>
@@ -206,7 +248,7 @@ const PaySlip = () => {
                                 </td>
 
                                 <td className='text-center border-r'>
-                                    {data.pf}/-
+                                    {calcu.pf}/-
                                 </td>
 
                             </tr>
@@ -248,7 +290,7 @@ const PaySlip = () => {
                                 </td>
 
                                 <td className='text-center border-r'>
-                                    {data.adv}/-
+                                    {calcu.advance}/-
                                 </td>
                             </tr>
 
@@ -278,7 +320,7 @@ const PaySlip = () => {
                                 </td>
 
                                 <td className='text-center border-r'>
-                                    {data.esic}/-
+                                    {calcu.esic}/-
                                 </td>
                             </tr>
 
@@ -288,7 +330,7 @@ const PaySlip = () => {
                                 </td>
 
                                 <td className='text-center border font-semibold'>
-                                    {parseInt(data.actual) - parseInt(data.bal)}/-
+                                    {parseInt(calcu.actual) - parseInt(calcu.balance)}/-
                                 </td>
                             </tr>
 
@@ -298,7 +340,7 @@ const PaySlip = () => {
                                 </td>
 
                                 <td className='text-center border font-semibold'>
-                                    {data.bal}/-
+                                    {calcu.balance}/-
                                 </td>
                             </tr>
 
@@ -332,4 +374,4 @@ const PaySlip = () => {
     )
 }
 
-export default PaySlip
+export default PaySlipEdited

@@ -6,6 +6,8 @@ import useSearch from '../hooks/useSearch';
 import { useLocation, Link } from 'react-router-dom';
 import moment from 'moment';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import logo from '../logo.png';
+import logo4 from '../logo4.png';
 
 const WorkerInformation = ({ user }) => {
 
@@ -91,9 +93,13 @@ const WorkerInformation = ({ user }) => {
                     : <></>
             }
 
-            <div className='border p-2 mt-4 w-auto md:w-full'>
+            <div className='relative border p-2 mt-4 w-auto md:w-full'>
 
                 <>
+
+                    <div className='w-64 h-64 absolute bg-gray-500 flex items-center justify-center opacity-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
+                        <img className='w-64 h-64' srcSet={logo} alt="" />
+                    </div>
 
                     <p className='text-fix text-xl  md:text-2xl underline underline-offset-4 text-center font-medium my-2'>Information Card</p>
 

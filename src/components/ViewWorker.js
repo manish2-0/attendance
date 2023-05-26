@@ -23,7 +23,7 @@ const ViewWorker = () => {
 
 
     return (
-        <div className='p-2 pt-20 max-w-[1000px] mx-auto'>
+        <div id='workercard' className='p-2 pt-20 max-w-[1000px] mx-auto'>
             <WorkerInformation user={values} />
             {
                 attendance.length != 0

@@ -95,6 +95,11 @@ const AttendanceCard = ({ user }) => {
         settemp({ "adv": adv, "food": food, "travel": travel, "atte": atte, "bal": bal, "actual": actualtotal, "pf": pf, "esic": esic, "pt": pt });
     }, [attendance]);
 
+    const printwindow = async (e) => {
+        e.preventDefault();
+        window.print();
+    }
+
 
     return (
         <>
@@ -102,15 +107,25 @@ const AttendanceCard = ({ user }) => {
 
             <p className='text-fix'>Attendance for: {data.month},{data.year}</p>
 
-            {/* <div className='flex'>
-                <button class="bg-fix hover:bg-blue-800 text-white font-medium py-1 px-5 rounded my-1">Print</button>
-                <Link state={{ data: temp, personal: user, month: data.month, year: data.year }} to="/payslip" className="bg-fix hover:bg-blue-800 text-white font-medium py-1 px-5 rounded my-1 ml-2">Pay Slip</Link>
-            </div> */}
+            <div id='cardbutton' className='flex'>
+                <button onClick={printwindow} class="bg-fix hover:bg-blue-800 text-white font-medium py-1 px-5 rounded my-1">Print</button>
+
+                {
+                    localStorage.getItem("role") == "Admin"
+                        ?
+                        <>
+                            <Link state={{ data: temp, personal: user, month: data.month, year: data.year }} to="/payslip" className="bg-fix hover:bg-blue-800 text-white font-medium py-1 px-5 rounded my-1 ml-2">Summary</Link>
+                            <Link state={{ data: temp, personal: user, month: data.month, year: data.year }} to="/payslipedited" className="bg-fix hover:bg-blue-800 text-white font-medium py-1 px-5 rounded my-1 ml-2">Pay Slip </Link>
+                        </>
+                        : <></>
+                }
+
+            </div>
 
             <div className="relative overflow-x-auto scrollbar-hide">
 
 
-                <table className="container w-auto md:w-full m-1 mx-auto text-xs lg:text-sm text-left text-gray-500 border shadow">
+                <table className=" md:w-full m-1 mx-auto text-xs lg:text-sm text-left text-gray-500 border shadow">
                     <thead className="text-white uppercase border-b border-gray-300 bg-fix">
                         <tr className=''>
                             {/* <th scope="col" className="text-center border px-1 whitespace-nowrap">
@@ -137,16 +152,16 @@ const AttendanceCard = ({ user }) => {
                             <th scope="col" className="text-center border px-1 py-1 whitespace-nowrap">
                                 Advance
                             </th>
-                            <th scope="col" className="text-center border px-1 py-1 whitespace-nowrap">
+                            <th id='cardremarks' scope="col" className="text-center border px-1 py-1 whitespace-nowrap">
                                 Remarks
                             </th>
-                            <th scope="col" className="text-center border px-6 py-1 whitespace-nowrap">
+                            <th id='cardmarkedby' scope="col" className="text-center border px-6 py-1 whitespace-nowrap">
                                 Marked By
                             </th>
 
                             {
                                 localStorage.getItem("role") == "Admin"
-                                    ? <th scope="col" className="text-center border px-3 py-1 whitespace-nowrap">
+                                    ? <th id='cardedit' scope="col" className="text-center border px-3 py-1 whitespace-nowrap">
                                         Edit
                                     </th>
                                     : <></>
@@ -186,16 +201,16 @@ const AttendanceCard = ({ user }) => {
                                     <td className="text-center border px-1 py-1">
                                         {ele.advance}/-
                                     </td>
-                                    <td className="text-center border px-2 py-1 whitespace-wrap">
+                                    <td id='cardremarksdata' className="text-center border px-2 py-1 whitespace-wrap">
                                         {ele.remarks}
                                     </td>
-                                    <td className="text-center border px-2 py-1 whitespace-wrap">
+                                    <td id='cardmarkedbydata' className="text-center border px-2 py-1 whitespace-wrap">
                                         {ele.marked_by}
                                     </td>
 
                                     {
                                         localStorage.getItem("role") == "Admin"
-                                            ? <td className="text-center text-red-600 border px-3 py-1 whitespace-nowrap hover:underline underline-offset-2 cursor-pointer ">
+                                            ? <td id='cardeditdata' className="text-center text-red-600 border px-3 py-1 whitespace-nowrap hover:underline underline-offset-2 cursor-pointer ">
                                                 <Link to="/editattendance" state={{ values: ele, personinformation: user }}>Edit</Link>
                                             </td>
                                             : <></>
