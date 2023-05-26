@@ -79,7 +79,7 @@ const PaySlipEdited = () => {
                     <p className='text-lg'><span className='text-fix'>Designation:: </span>{personal.designation}</p>
 
                     <p className='text-lg '><span className='text-fix'>Aadhar Number: </span>{personal.aadhar}</p>
-                    <p className='text-lg'><span className='text-fix'>PAN Number: </span>{personal.contact}</p>
+                    <p className='text-lg'><span className='text-fix'>PAN Number: </span>{personal.pan}</p>
 
                     <p className='text-lg'><span className='text-fix'>Bank Account: </span>{personal.acc_no}</p>
                     <p className='text-lg'><span className='text-fix'>IFSC: </span>{personal.ifsc}</p>
