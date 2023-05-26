@@ -84,7 +84,7 @@ const PaySlip = () => {
                                         Total Wages
                                     </td>
                                     <td className='text-center border-r'>
-                                        {data.actual}/-
+                                        {(parseInt(personal.rate) * parseFloat(data.atte).toFixed(3)).toFixed(0)}/-
                                     </td>
                                 </tr>
 
