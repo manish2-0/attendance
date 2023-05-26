@@ -105,7 +105,7 @@ const PaySlipEdited = () => {
 
                                 <tr>
                                     <td className='text-center border-r'>
-                                        Basic
+                                        Basic Salary
                                     </td>
                                     <td className='text-center border-r'>
                                         {calcu.basic}/-
@@ -114,7 +114,7 @@ const PaySlipEdited = () => {
 
                                 <tr>
                                     <td className='text-center border-r'>
-                                        DA
+                                        Dearness Allowance
                                     </td>
                                     <td className='text-center border-r'>
                                         {calcu.da}/-
