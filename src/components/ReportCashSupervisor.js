@@ -147,7 +147,7 @@ const ReportCashSupervisor = () => {
                   Rate
                 </th>
                 <th scope="col" className="text-center border px-2 py-1 whitespace-nowrap">
-                  Food
+                  Food and Travelling
                 </th>
                 <th scope="col" className="text-center border px-1 py-1 whitespace-nowrap">
                   Time

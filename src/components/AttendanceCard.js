@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 
 const AttendanceCard = ({ user }) => {
 
+    const numFor = Intl.NumberFormat('en-IN');
+
     const { data, setdata, attendance, setattendance } = useSearch();
 
     const [temp, settemp] = useState({
@@ -230,14 +232,14 @@ const AttendanceCard = ({ user }) => {
 
                         <tr className='border p-1'>
                             <td colSpan={11} className='p-1 text-base'>
-                                <span className='text-fix font-medium'> Total Food and Travelling:</span> {parseInt(temp.food) + parseInt(temp.travel)}/-
+                                <span className='text-fix font-medium'> Total Food and Travelling:</span> {numFor.format(parseInt(temp.food) + parseInt(temp.travel))}/-
                             </td>
                         </tr>
 
 
                         <tr className='border p-1'>
                             <td colSpan={11} className='p-1 text-base'>
-                                <span className='text-fix font-medium'> Advance:</span> {temp.adv}/-
+                                <span className='text-fix font-medium'> Advance:</span> {numFor.format(temp.adv)}/-
                             </td>
                         </tr>
 
@@ -258,11 +260,11 @@ const AttendanceCard = ({ user }) => {
                                     </tr>
                                     <tr className='border p-1'>
                                         <td colSpan={11} className='p-1 text-base'>
-                                            <span className='text-fix font-medium'> Total PT Amount:</span>{temp.pt}/-
+                                            <span className='text-fix font-medium'> Total PT Amount:</span>{numFor.format(temp.pt)}/-
                                         </td>
                                     </tr> <tr className='border p-1'>
                                         <td colSpan={11} className='p-1 text-base'>
-                                            <span className='text-fix font-medium'> Total Balance:</span>{temp.bal}/-
+                                            <span className='text-fix font-medium'> Total Balance:</span>{numFor.format(temp.bal)}/-
                                         </td>
                                     </tr>
                                 </>

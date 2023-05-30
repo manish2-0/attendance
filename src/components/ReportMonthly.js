@@ -7,6 +7,8 @@ import useAxiosPrivate from '../hooks/useAxiosPrivate';
 
 const ReportMonthly = () => {
 
+    const numFor = Intl.NumberFormat('en-IN');
+
     const [loading, setloading] = useState(false);
     const { modal, setmodal, modalmessage, setmodalmessage } = useModal();
 
@@ -201,7 +203,7 @@ const ReportMonthly = () => {
             }
 
 
-            setdata(val => [...val, { "name": name, "er_no": er_no, "rate": rate, "atte": atte, "total": tot, "advance": adv, "food": food, "travelling": travel, "pf": perc, "esic": es, "pt": p, "balance": bal }])
+            setdata(val => [...val, { "name": name, "er_no": er_no, "rate": rate, "atte": atte, "total": numFor.format(tot), "advance": numFor.format(adv), "food": food, "travelling": travel, "pf": perc, "esic": es, "pt": p, "balance": numFor.format(bal) }])
 
             bal = actualtotal - adv - perc - p - es;
 
@@ -220,15 +222,15 @@ const ReportMonthly = () => {
 
         }
 
-        settotalactual(tmpactual);
-        settotalfood(tmpfood);
-        settotaltravelling(tmptravelling);
-        settotaladvance(tmpadvance);
-        settotalbalance(tmpbalance);
+        settotalactual(numFor.format(tmpactual));
+        settotalfood(numFor.format(tmpfood));
+        settotaltravelling(numFor.format(tmptravelling));
+        settotaladvance(numFor.format(tmpadvance));
+        settotalbalance(numFor.format(tmpbalance));
 
-        setesic(tmpesic);
-        setpf(tmppf);
-        setpt(tmppt);
+        setesic(numFor.format(tmpesic));
+        setpf(numFor.format(tmppf));
+        setpt(numFor.format(tmppt));
 
 
 

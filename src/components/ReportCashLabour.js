@@ -10,6 +10,8 @@ import moment from 'moment';
 
 const ReportCashLabour = () => {
 
+    const numFor = Intl.NumberFormat('en-IN');
+
     const [loading, setloading] = useState(false);
     const { modal, setmodal, modalmessage, setmodalmessage } = useModal();
 
@@ -136,7 +138,7 @@ const ReportCashLabour = () => {
             tot = parseInt(tot) + parseInt(((parseFloat(ele.present) * parseInt(ele.rate)) + parseInt(ele.food)).toFixed(0));
         })
 
-        settot(tot);
+        settot(numFor.format(tot));
 
 
     }, [data, siteselected]);
@@ -239,7 +241,7 @@ const ReportCashLabour = () => {
                                     Base Rate
                                 </th>
                                 <th scope="col" className="text-center border px-1 py-1 whitespace-nowrap">
-                                    Food
+                                    Food and Travelling
                                 </th>
                                 <th scope="col" className="text-center border px-1 py-1 whitespace-nowrap">
                                     Total
