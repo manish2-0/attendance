@@ -14,6 +14,9 @@ const EditAttendance = () => {
     const [time1, settime1] = useState("");
     const [time2, settime2] = useState("");
 
+    const [t1, sett1] = useState("");
+    const [t2, sett2] = useState("");
+
     const [response, setresponse] = useState("");
 
     const api = useAxiosPrivate();
@@ -367,6 +370,31 @@ const EditAttendance = () => {
         getpendingsites();
         console.log(values)
         console.log(personinformation)
+
+        if (personinformation.designation == "Office Staff") {
+
+            let a = values.time;
+            const myArray = a.split(" ");
+            console.log(myArray)
+
+            let val1 = myArray[0].split(":");
+            let val2 = myArray[2].split(":");
+
+            settime1(val1)
+            settime2(val2)
+
+            sett1(myArray[0])
+            sett2(myArray[2])
+
+
+            setdata(val => ({ ...val, time: a }))
+
+        }
+
+
+
+        // const time = myArray[0].split(":");
+        // console.log(time);
     }, []);
 
     return (
@@ -412,11 +440,11 @@ const EditAttendance = () => {
                                         <>
                                             <div className='flex items-center flex-wrap my-2'>
                                                 <p className='text-lg text-fix mr-2'>In Time:</p>
-                                                <input onChange={handlechangetime} name="time1" className='w-full sm:w-72 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="time" placeholder='Time' required />
+                                                <input defaultValue={t1} onChange={handlechangetime} name="time1" className='w-full sm:w-72 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="time" required />
                                             </div>
                                             <div className='flex items-center flex-wrap my-2'>
                                                 <p className='text-lg text-fix mr-2'>Out Time:</p>
-                                                <input onChange={handlechangetime} name="time2" className='w-full sm:w-72 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="time" placeholder='Time' required />
+                                                <input defaultValue={t2} onChange={handlechangetime} name="time2" className='w-full sm:w-72 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="time" placeholder='Time' required />
                                             </div>
                                         </>
                                         : <div className='flex items-center flex-wrap my-2'>

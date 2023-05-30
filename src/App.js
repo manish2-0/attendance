@@ -37,6 +37,8 @@ import PaySlip from './components/PaySlip';
 import EditAttendanceSupervisor from './components/EditAttendanceSupervisor';
 import Testing3 from './components/Testing3';
 import PaySlipEdited from './components/PaySlipEdited';
+import Testing4 from './components/Testing4';
+
 
 function App() {
   return (
@@ -49,6 +51,7 @@ function App() {
             <Route path='testing' element={<Testing2 />} />
             
             <Route path='testing3' element={<Testing3 />} />
+            <Route path='testing4' element={<Testing4 />} />
 
             <Route element={<PersistLogin />}>
               <Route element={<RequireAuth />}>
