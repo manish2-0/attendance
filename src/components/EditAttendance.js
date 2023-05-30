@@ -380,11 +380,11 @@ const EditAttendance = () => {
             let val1 = myArray[0].split(":");
             let val2 = myArray[2].split(":");
 
-            settime1(val1)
-            settime2(val2)
+            settime1(val1);
+            settime2(val2);
 
-            sett1(myArray[0])
-            sett2(myArray[2])
+            sett1(myArray[0]);
+            sett2(myArray[2]);
 
 
             setdata(val => ({ ...val, time: a }))

@@ -183,7 +183,7 @@ const AttendanceCard = ({ user }) => {
                                         {moment(ele.date).format("DD/MM/YYYY")}
                                     </td>
                                     <td className="text-center border px-1 py-1">
-                                        {ele.attendance}
+                                        {ele.attendance.toFixed(6)}
                                     </td>
                                     <td className="text-center border px-1 py-1">
                                         {ele.site_code}
