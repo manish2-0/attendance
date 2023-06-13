@@ -139,13 +139,13 @@ const ReportMonthly = () => {
             // let bs=0;
 
             while ((i + count) < temp.length && temp[i].er_no == temp[i + count].er_no) {
-                if (temp[i + count].site_code == "242") {
-                    console.log(temp[i + count]);
-                    adv = adv + parseInt(temp[i + count].advance);
-                    food = food + parseInt(temp[i + count].food);
-                    travel = travel + parseInt(temp[i + count].travelling);
-                    atte = (parseFloat(atte) + parseFloat(temp[i + count].attendance)).toFixed(6);
-                }
+
+                // console.log(temp[i + count]);
+                adv = adv + parseInt(temp[i + count].advance);
+                food = food + parseInt(temp[i + count].food);
+                travel = travel + parseInt(temp[i + count].travelling);
+                atte = (parseFloat(atte) + parseFloat(temp[i + count].attendance)).toFixed(6);
+
                 count++;
             }
 
