@@ -139,7 +139,7 @@ const ReportMonthly = () => {
             // let bs=0;
 
             while ((i + count) < temp.length && temp[i].er_no == temp[i + count].er_no) {
-                if (temp[i + count].site_code == "142") {
+                if (temp[i + count].site_code == "242") {
                     console.log(temp[i + count]);
                     adv = adv + parseInt(temp[i + count].advance);
                     food = food + parseInt(temp[i + count].food);
