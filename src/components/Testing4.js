@@ -1,16 +1,37 @@
 import React, { useState } from 'react'
+import logo from '../logo.png';
+import logo4 from '../logoblue.png';
 
 const Testing4 = () => {
 
-  const [time1, settime1] = useState("15:00")
-
-  const handlechangetime = (e) => {
-    console.log(e.target.value + ":00")
-  }
-
   return (
-    <div>
-      <input defaultValue={time1} onChange={handlechangetime} name="time2" className='w-full sm:w-72 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="time" placeholder='Time' required />
+    <div className='flex items-center justify-around w-full min-h-screen bg-[#E6E9F2]'>
+      {/* <img className='absolute w-screen h-screen' srcSet={wall} alt="" /> */}
+      <div className='relative m-4 h-96 bg-[#EFEFF9] border border-white w-full max-w-6xl rounded-lg sm:flex sm:justify-around sm:h-auto items-center sm:backdrop-filter sm:backdrop-blur-[20px] shadow-md'>
+
+
+        <div className='absolute inline left-1/2 -translate-x-1/2 -translate-y-1/2 p-2 rounded-full h-[120px] w-[120px] bg-[#1C4C7B] sm:bg-transparent border-gray-300 sm:relative sm:w-[45%] sm:left-0 sm:translate-x-0 sm:translate-y-0 sm:h-full sm:rounded-none sm:border-0 sm:flex sm:justify-center sm:m-5'>
+          <img className='sm:hidden drop-shadow-[2px_3px_2px_rgba(0,0,0,1)]' srcSet={logo} alt="" />
+          <img className='hidden sm:block ' srcSet={logo4} alt="" />
+          <span className='h-[30px] w-[20px] bg-transparent absolute top-1/2 -left-[16px] shadow-[2px_-8px_0px_#1C4C7B] rounded-tr-full sm:hidden'></span>
+          <span className='h-[30px] w-[20px] bg-transparent absolute top-1/2 -right-[16px] shadow-[-2px_-10px_0px_#1C4C7B] rounded-tl-full sm:hidden'></span>
+        </div>
+
+
+        <form className='mt-20 m-5 sm:w-[40%] sm:border sm:pb-6 sm:border-gray-200 sm:p-4 sm:my-10 sm:h-fit sm:rounded-lg sm:bg-white/60'>
+          <h2 className='hidden sm:block text-center text-[44px] mb-2  text-[#4B70E2] logintxt font-bold '>LOGIN</h2>
+          <label className='text-xl font-bold'>User ID:</label>
+          <input name="admin_id" className='block w-full h-10 px-2 my-3 rounded-md outline outline-slate-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1' type="text" placeholder='ID' required />
+          <label className='text-xl font-bold'>Password:</label>
+          <input name="password" className='block w-full h-10 px-2 my-3 rounded-md outline outline-slate-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1' type="password" placeholder='Password' required />
+          <div className='flex justify-center mt-7'>
+            <button className='sm:hidden block px-12 py-3 bg-[#1C4C7B] border-2 border-[#1C4C7B] rounded-full text-[20px] text-white hover:bg-white hover:text-[#1C4C7B] hover:drop-shadow-[2px_5px_2px_rgba(0,0,0,0.3)]'>LOGIN</button>
+            <button className='sm:block hidden px-10 text-white text-lg py-2 rounded-full bg-[#4B70E2]'>LOGIN</button>
+          </div>
+        </form>
+
+      </div>
+
     </div>
   )
 }

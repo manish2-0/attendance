@@ -68,6 +68,7 @@ const ReportMonthly = () => {
             await api.post('attendance/attendance-report', JSON.stringify(inputs)).then(async function (response) {
                 if (response?.data?.data) {
                     settemp(response.data.data)
+                    // console.log(response.data.data)
                     setloading(false);
                     setmodal(true);
                     await setmodalmessage({
@@ -138,11 +139,13 @@ const ReportMonthly = () => {
             // let bs=0;
 
             while ((i + count) < temp.length && temp[i].er_no == temp[i + count].er_no) {
-                adv = adv + parseInt(temp[i + count].advance);
-                food = food + parseInt(temp[i + count].food);
-                travel = travel + parseInt(temp[i + count].travelling);
-                atte = (parseFloat(atte) + parseFloat(temp[i + count].attendance)).toFixed(6);
-
+                if (temp[i + count].site_code == "142") {
+                    console.log(temp[i + count]);
+                    adv = adv + parseInt(temp[i + count].advance);
+                    food = food + parseInt(temp[i + count].food);
+                    travel = travel + parseInt(temp[i + count].travelling);
+                    atte = (parseFloat(atte) + parseFloat(temp[i + count].attendance)).toFixed(6);
+                }
                 count++;
             }
 
