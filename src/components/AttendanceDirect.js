@@ -4,6 +4,7 @@ import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Loader from './Loader';
 import Modal from '../modals/Modal';
+import moment from 'moment';
 
 const AttendanceDirect = () => {
 
@@ -175,7 +176,7 @@ const AttendanceDirect = () => {
 
                                 <div className='flex items-center flex-wrap my-2'>
                                     <p className='text-lg text-fix mr-2'>Date:</p>
-                                    <input onChange={handlechange} onWheel={e => e.target.blur()} name="date" className='w-40 sm:w-52 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="date" required />
+                                    <input onChange={handlechange} max={moment().format("YYYY-MM-DD")} onWheel={e => e.target.blur()} name="date" className='w-40 sm:w-52 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="date" required />
                                 </div>
 
                                 <div className='flex items-center flex-wrap my-2'>
