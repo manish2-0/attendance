@@ -222,7 +222,7 @@ const AttendanceCard = ({ user }) => {
                                 // <tr className="bg-white border-b hover:bg-gray-50 text-[10px] lg:text-sm" >
                                 <tr className={
                                     user.designation == "Office Staff"
-                                        ? (attendance2[index][0] >= "09" && attendance2[index][1] > "45") || (attendance2[index][0] >= 10 && attendance2[index][1] >= 0 && attendance2[index][1] <= 59)
+                                        ? (attendance2[index][0] >= "09" && attendance2[index][1] > "45") || (attendance2[index][0] >= "10" && attendance2[index][1] >= "0" && attendance2[index][1] <= "59")
                                             ? "bg-red-400 border-b text-gray-200 text-[10px] lg:text-sm"
                                             : "bg-white border-b hover:bg-gray-50 text-[10px] lg:text-sm"
                                         : "bg-white border-b hover:bg-gray-50 text-[10px] lg:text-sm"}
