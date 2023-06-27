@@ -9,7 +9,7 @@ const AttendanceCard = ({ user }) => {
 
     const numFor = Intl.NumberFormat('en-IN');
 
-    const { data, setdata, attendance, setattendance } = useSearch();
+    const { data, setdata, attendance, setattendance, attendance2, setattendance2 } = useSearch();
 
     const [temp, settemp] = useState({
         "adv": 0,
@@ -18,7 +18,12 @@ const AttendanceCard = ({ user }) => {
         "atte": 0
     });
 
+    // const [attendance2, setattendance2] = useState([]);
+
     useEffect(() => {
+
+        // setattendance2([]);
+
         let adv = 0;
         let food = 0;
         let travel = 0;
@@ -30,11 +35,43 @@ const AttendanceCard = ({ user }) => {
         let pt = 0;
         let esic = 0;
 
+        // For Redmarks
+        // if (user.designation == "Office Staff") {
+        //     for (let i = 0; i < attendance.length; i++) {
+
+        //         let a = attendance[i].time;
+        //         const myArray = a.split(" ");
+        //         // console.log(myArray)
+
+        //         let val1 = myArray[0].split(":");
+        //         // let val2 = myArray[2].split(":");
+
+        //         // console.log(val1)
+        //         setattendance2(val => [...val, val1]);
+
+        //         // console.log(val2)
+        //         // settime1(val1);
+        //         // settime2(val2);
+
+        //         // sett1(myArray[0]);
+        //         // sett2(myArray[2]);
+
+
+        //         // setdata(val => ({ ...val, time: a }))
+
+        //     }
+        //     console.log(attendance2)
+        // }
+
+
+        // For calculations
         for (let i = 0; i < attendance.length; i++) {
             adv = adv + parseInt(attendance[i].advance);
             food = food + parseInt(attendance[i].food);
             travel = travel + parseInt(attendance[i].travelling);
             atte = (parseFloat(atte) + parseFloat(attendance[i].attendance)).toFixed(6);
+
+
         }
 
         let tot = 0;
@@ -101,6 +138,12 @@ const AttendanceCard = ({ user }) => {
         e.preventDefault();
         window.print();
     }
+
+    useEffect(() => {
+        // console.log(data)
+        // console.log(attendance2)
+        // console.log(user)
+    }, []);
 
 
     return (
@@ -176,12 +219,19 @@ const AttendanceCard = ({ user }) => {
 
                         {
                             attendance.map((ele, index) =>
-                                <tr className="bg-white border-b hover:bg-gray-50 text-[10px] lg:text-sm">
+                                // <tr className="bg-white border-b hover:bg-gray-50 text-[10px] lg:text-sm" >
+                                <tr className={
+                                    user.designation == "Office Staff"
+                                        ? attendance2[index][0] >= "09" && attendance2[index][1] >= 45
+                                            ? "bg-red-400 border-b text-gray-200 text-[10px] lg:text-sm"
+                                            : "bg-white border-b hover:bg-gray-50 text-[10px] lg:text-sm"
+                                        : "bg-white border-b hover:bg-gray-50 text-[10px] lg:text-sm"}
+                                >
 
                                     {/* <th scope="row" className="text-center border py-1 font-medium text-fix ">
                                         {index + 1}
                                     </th> */}
-                                    <td className="text-center border py-1 px-1 whitespace-nowrap">
+                                    < td className="text-center border py-1 px-1 whitespace-nowrap" >
                                         {moment(ele.date).format("DD/MM/YYYY")}
                                     </td>
                                     <td className="text-center border px-1 py-1">
@@ -275,8 +325,8 @@ const AttendanceCard = ({ user }) => {
 
 
                     </tbody>
-                </table>
-            </div>
+                </table >
+            </div >
 
         </>
     )

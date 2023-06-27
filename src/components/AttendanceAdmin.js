@@ -322,7 +322,7 @@ const AttendanceAdmin = () => {
                 console.log("In second if")
             }
 
-            else if ((time1[0] >= 6 && time1[0] <= 8 && time1[1] >= 0 && time1[1] <= 59) || (time1[0] == 9 && time1[1] >= 0 && time1[1] <= 45)) { // Intime morning 6:00 to 9:45
+            else if ((time1[0] >= 6 && time1[0] <= 8 && time1[1] >= 0 && time1[1] <= 59) || (time1[0] == 9 && time1[1] >= 0 && time1[1] <= 50)) { // Intime morning 6:00 to 9:45
 
                 let t = time1[0] + ":" + time1[1] + " to " + time2[0] + ":" + time2[1];
                 setattendance(values => ({ ...values, "time": t }))
@@ -386,7 +386,7 @@ const AttendanceAdmin = () => {
                 }
             }
 
-            else if ((time1[0] == 9 && time1[1] > 45) || (time1[0] >= 10 && time1[1] >= 0 && time1[1] <= 59)) {      //If a person comes late after 9:45
+            else if ((time1[0] == 9 && time1[1] > 50) || (time1[0] >= 10 && time1[1] >= 0 && time1[1] <= 59)) {      //If a person comes late after 9:45
 
                 let under = delayedhours();
 

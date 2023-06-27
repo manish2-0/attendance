@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 
 const ViewWorker = () => {
 
-    const { data, setdata, attendance, setattendance } = useSearch();
+    const { data, setdata, attendance, setattendance, attendance2, setattendance2 } = useSearch();
 
     const location = useLocation();
     const { values } = location.state;
@@ -18,6 +18,7 @@ const ViewWorker = () => {
             "month": "-",
             "year": "-"
         });
+        setattendance2([]);
     }, []);
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Loader from './Loader';
 import useModal from '../hooks/useModal';
 import Modal from '../modals/Modal';
@@ -12,7 +12,7 @@ import logo4 from '../logo4.png';
 const WorkerInformation = ({ user }) => {
 
     const [loading, setloading] = useState(false);
-    const { data, setdata, attendance, setattendance } = useSearch();
+    const { data, setdata, attendance, setattendance, attendance2, setattendance2 } = useSearch();
 
     const api = useAxiosPrivate();
 
@@ -45,6 +45,22 @@ const WorkerInformation = ({ user }) => {
                 if (response?.data?.data) {
                     setloading(false);
                     setattendance(response.data.data);
+                    setattendance2([]);
+
+                    // For Redmarks
+                    if (user.designation == "Office Staff") {
+                        for (let i = 0; i < response.data.data.length; i++) {
+
+                            let a = response.data.data[i].time;
+                            const myArray = a.split(" ");
+
+                            let val1 = myArray[0].split(":");
+                            setattendance2(val => [...val, val1]);
+
+                        }
+                        // console.log(attendance2)
+                    }
+
                     setmodal(true);
                     await setmodalmessage({
                         "text1": "Success",
@@ -76,6 +92,10 @@ const WorkerInformation = ({ user }) => {
         }
 
     }
+
+    useEffect(() => {
+        console.log(attendance2)
+    }, [attendance2]);
 
 
     return (

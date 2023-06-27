@@ -10,9 +10,12 @@ const SearchState = (props) => {
     });
 
     const [attendance, setattendance] = useState([]);
+    const [attendance2, setattendance2] = useState([]);
+
+
 
     return (
-        <SearchContext.Provider value={{ data, setdata, attendance, setattendance }}>
+        <SearchContext.Provider value={{ data, setdata, attendance, setattendance, attendance2, setattendance2 }}>
             {props.children}
         </SearchContext.Provider>
     )
