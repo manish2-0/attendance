@@ -15,7 +15,8 @@ const ReportCashSupervisor = () => {
   const api = useAxiosPrivate();
 
   const [inputs, setinputs] = useState({
-    "date": "-"
+    "from": "-",
+    "to": "-"
   });
 
 
@@ -35,7 +36,7 @@ const ReportCashSupervisor = () => {
     setdata([]);
     setloading(true);
 
-    if (inputs.date == "") {
+    if (inputs.from == "" || inputs.to == "") {
       setloading(false);
       setmodal(true);
       setmodalmessage({
@@ -103,7 +104,7 @@ const ReportCashSupervisor = () => {
         <div className=' md:w-[700px] lg:w-[900px] xl:w-[1000px] 2xl:w-[1400px] mx-auto'>
           <h1 className='text-2xl text-fix'>Cash Labour Report</h1>
 
-          <div className='flex flex-wrap flex-row'>
+          {/* <div className='flex flex-wrap flex-row'>
             <form onSubmit={submitform}>
 
               <div className='flex flex-wrap flex-row mb-2'>
@@ -116,6 +117,33 @@ const ReportCashSupervisor = () => {
               </div>
 
               <button class="bg-fix hover:bg-blue-800 text-white font-bold py-1 px-5 rounded mb-1 mt-1">
+                Get
+              </button>
+
+            </form>
+
+          </div> */}
+
+          <div className='flex flex-wrap flex-row'>
+            <form onSubmit={submitform}>
+
+              <div className='flex flex-wrap flex-row mb-2'>
+
+                <div className='flex items-center flex-wrap pr-6'>
+                  <h1 className='text-fix text-lg w-fit pr-1'>From:</h1>
+                  <input onChange={handlechange} name="from" type='date' className="h-9 text-base border rounded border-slate-300" required />
+
+                </div>
+
+                <div className='flex  items-center flex-wrap pr-6'>
+                  <h1 className='text-fix text-lg w-fit pr-1'>To:</h1>
+                  <input onChange={handlechange} name="to" type='date' className="h-9 text-base border rounded border-slate-300" required />
+
+                </div>
+
+              </div>
+
+              <button class="bg-fix hover:bg-blue-800 text-white font-bold py-1 px-5 rounded mb-1 mt-1 mr-2">
                 Get
               </button>
 
