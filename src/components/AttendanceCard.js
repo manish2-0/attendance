@@ -4,10 +4,14 @@ import useSearch from '../hooks/useSearch';
 import moment from 'moment';
 import { useLocation } from 'react-router-dom';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import Loader from './Loader';
 
 const AttendanceCard = ({ user }) => {
 
     const numFor = Intl.NumberFormat('en-IN');
+
+    const [loading, setloading] = useState(false);
 
     const { data, setdata, attendance, setattendance, attendance2, setattendance2 } = useSearch();
 
@@ -17,6 +21,8 @@ const AttendanceCard = ({ user }) => {
         "travel": 0,
         "atte": 0
     });
+
+    const api = useAxiosPrivate();
 
     // const [attendance2, setattendance2] = useState([]);
 
@@ -139,15 +145,45 @@ const AttendanceCard = ({ user }) => {
         window.print();
     }
 
-    useEffect(() => {
-        // console.log(data)
-        // console.log(attendance2)
-        // console.log(user)
-    }, []);
+    const deletefile = async (f) => {
+        // ref.current.click();
+        setloading(true)
+
+        try {
+            await api.delete(`/attendance/attendance-delete/${f.sr_no}`).then(async function (response) {
+                if (response.data.status == 1) {
+                    setattendance(attendance.filter((e) => {
+                        return e !== f;
+                    }));
+                    setloading(false);
+
+                    // window.alert("File deleted succesfully");
+                }
+                else {
+                    setloading(false);
+                }
+
+
+            })
+
+        } catch (error) {
+            setloading(false);
+            
+
+        }
+
+    }
 
 
     return (
         <>
+
+            {
+                loading
+                    ? <Loader />
+                    : <></>
+            }
+
             <span className='w-full block border mb-2'></span>
 
             <p className='text-fix'>Attendance for: {data.month},{data.year}</p>
@@ -212,6 +248,14 @@ const AttendanceCard = ({ user }) => {
                                     : <></>
                             }
 
+                            {
+                                localStorage.getItem("role") == "Admin" && localStorage.getItem('admin_id') == "manish"
+                                    ? <th id='cardedit' scope="col" className="text-center border px-3 py-1 whitespace-nowrap">
+                                        Delete
+                                    </th>
+                                    : <></>
+                            }
+
 
                         </tr>
                     </thead>
@@ -264,6 +308,14 @@ const AttendanceCard = ({ user }) => {
                                         localStorage.getItem("role") == "Admin"
                                             ? <td id='cardeditdata' className="text-center text-red-600 border px-3 py-1 whitespace-nowrap hover:underline underline-offset-2 cursor-pointer ">
                                                 <Link to="/editattendance" state={{ values: ele, personinformation: user }}>Edit</Link>
+                                            </td>
+                                            : <></>
+                                    }
+
+                                    {
+                                        localStorage.getItem("role") == "Admin" && localStorage.getItem('admin_id') == "manish"
+                                            ? <td id='cardeditdata' className="text-center text-red-600 border px-3 py-1 whitespace-nowrap hover:underline underline-offset-2 cursor-pointer ">
+                                                <button onClick={() => { deletefile(ele) }}>Delete</button>
                                             </td>
                                             : <></>
                                     }
