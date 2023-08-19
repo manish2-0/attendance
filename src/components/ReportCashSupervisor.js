@@ -3,6 +3,9 @@ import Loader from './Loader';
 import Modal from '../modals/Modal';
 import useModal from '../hooks/useModal';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import moment from 'moment';
+
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 
 const ReportCashSupervisor = () => {
 
@@ -162,6 +165,9 @@ const ReportCashSupervisor = () => {
                 <th scope="col" className="text-center border px-2 whitespace-nowrap">
                   No.
                 </th>
+                <th scope="col" className="text-center border px-2 whitespace-nowrap">
+                  Date
+                </th>
                 <th scope="col" className="text-center border px-6 whitespace-nowrap ">
                   Name
                 </th>
@@ -183,6 +189,9 @@ const ReportCashSupervisor = () => {
                 <th scope="col" className="text-center border px-3 py-1 whitespace-nowrap">
                   Remarks
                 </th>
+                <th scope="col" className="text-center border px-3 py-1 whitespace-nowrap">
+                  Edit
+                </th>
 
 
               </tr>
@@ -192,20 +201,20 @@ const ReportCashSupervisor = () => {
               {
                 data.length == 0
                   ? <tr className="bg-white border-b hover:bg-gray-50 text-base">
-                    <td colSpan={10} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                    <td colSpan={9} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
                       No data found
                     </td>
                   </tr>
-                  :
-
-
-                  data.map((ele, no) =>
+                  : data.map((ele, no) =>
                     <tr className="bg-white border-b hover:bg-gray-50 text-[12px]">
 
                       <th scope="row" className="text-center border py-1 font-medium text-gray-900 whitespace-nowrap ">
                         {no + 1}
                       </th>
 
+                      <td className="text-center border px-2 py-1 whitespace-wrap">
+                        {moment(ele.date).format("DD/MM/YYYY")}
+                      </td>
                       <td className="text-center border px-2 py-1 whitespace-wrap">
                         {ele.name}
                       </td>
@@ -229,6 +238,18 @@ const ReportCashSupervisor = () => {
                       <td className="text-center border px-2 py-1 whitespace-wrap">
                         {ele.remarks}
                       </td>
+
+                      {
+                        moment(ele.date).format("YYYY-MM-DD") == moment().format("YYYY-MM-DD")
+                          ? <td id='hideedit1' className="text-center border px-1 py-1">
+                            <Link state={{ values: ele }} to="/editcash" className="font-medium text-fix hover:underline">Edit</Link>
+                          </td>
+                          : <td id='hideedit1' className="text-center border px-1 py-1">
+                            Not Editable
+                          </td>
+                      }
+
+
 
                     </tr>
 

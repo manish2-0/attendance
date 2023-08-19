@@ -4,6 +4,7 @@ import useModal from '../hooks/useModal';
 import Modal from '../modals/Modal';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import moment from 'moment';
 
 const EditSite = () => {
 
@@ -19,7 +20,9 @@ const EditSite = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        console.log(values)
         setsitename(val => ({ ...val, "name": values.site_name }));
+        setsitename(val => ({ ...val, "date": moment(values.date).format("YYYY-MM-DD") }));
     }, []);
 
     const handlechange = (event) => {
@@ -28,7 +31,23 @@ const EditSite = () => {
         const name = event.target.name;
         const val = event.target.value;
 
-        setsitename(value => ({ ...value, [name]: val }));
+        if (name != "date") {
+            if (val != "") {
+                setsitename(values => ({ ...values, [name]: val }));
+            }
+            else {
+                setsitename(values => ({ ...values, [name]: "-" }));
+            }
+        }
+
+        if (name == "date") {
+            if (val != "") {
+                setsitename(values => ({ ...values, [name]: val }));
+            }
+            else {
+                setsitename(values => ({ ...values, [name]: moment().format("YYYY-MM-DD") }));
+            }
+        }
     }
 
     const submitform = async (e) => {
@@ -103,6 +122,31 @@ const EditSite = () => {
                                 <option>Ongoing</option>
                                 <option>Done</option>
                             </select>
+                        </div>
+
+                        <div className='flex flex-wrap md:flex-nowrap w-full items-center mb-4'>
+                            <label className='min-w-fit pr-2 text-lg text-gray-900'>Site Supervisor:</label>
+                            <input defaultValue={sitename.supervisor} onChange={handlechange} name="supervisor" className='w-full px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="text" placeholder='Site Supervisor' />
+                        </div>
+
+                        <div className='flex flex-wrap md:flex-nowrap w-full items-center mb-4'>
+                            <label className='min-w-fit pr-2 text-lg text-gray-900'>Customer Name:</label>
+                            <input defaultValue={sitename.customer} onChange={handlechange} name="customer" className='w-full px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="text" placeholder='Customer Name' />
+                        </div>
+
+                        <div className='flex flex-wrap md:flex-nowrap w-full items-center mb-4'>
+                            <label className='min-w-fit pr-2 text-lg text-gray-900'>Address:</label>
+                            <input defaultValue={sitename.address} onChange={handlechange} name="address" className='w-full px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="text" placeholder='Address' />
+                        </div>
+
+                        <div className='flex flex-wrap md:flex-nowrap w-full items-center mb-4'>
+                            <label className='min-w-fit pr-2 text-lg text-gray-900'>Architect/Designer Name:</label>
+                            <input defaultValue={sitename.designer} onChange={handlechange} name="designer" className='w-full px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="text" placeholder='Architect/Designer Name' />
+                        </div>
+
+                        <div className='flex flex-wrap md:flex-nowrap w-full items-center mb-4'>
+                            <label className='min-w-fit pr-2 text-lg text-gray-900'>Date of Commencement:</label>
+                            <input defaultValue={moment(sitename.date).format("YYYY-MM-DD")} onChange={handlechange} max={moment().format("YYYY-MM-DD")} name="date" className='w-fit px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="date" />
                         </div>
 
                         <div className='flex items-center justify-start'>

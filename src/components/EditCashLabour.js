@@ -153,7 +153,11 @@ const EditCashLabour = () => {
 
                                     <div className='flex items-center flex-wrap my-2'>
                                         <p className='text-lg text-fix mr-2'>Date:</p>
-                                        <input defaultValue={data.date} onChange={handlechange} onWheel={e => e.target.blur()} name="date" className='w-40 sm:w-52 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="date" required />
+                                        {
+                                            localStorage.getItem("role") == "Admin"
+                                                ? <input defaultValue={data.date} onChange={handlechange} onWheel={e => e.target.blur()} name="date" className='w-40 sm:w-52 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="date" required />
+                                                : <input disabled defaultValue={data.date} onWheel={e => e.target.blur()} name="date" className='w-40 sm:w-52 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="date" required />
+                                        }
                                     </div>
 
                                     <div className='flex items-center flex-wrap my-2'>
