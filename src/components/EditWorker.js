@@ -223,8 +223,13 @@ const EditWorker = () => {
 
                         <div className='flex w-full items-center mb-4'>
                             <label className='text-lg min-w-fit pr-2 text-gray-900' htmlFor="">Base Rate:</label>
-                            <input disabled onChange={handlechange} defaultValue={data.rate} onWheel={e => e.target.blur()} name="rate" className='w-full sm:w-52 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="number" placeholder='Base Rate' required />
-                        </div>
+                            {
+                                localStorage.getItem("admin_id")=="manish"
+                                ?<input onChange={handlechange} defaultValue={data.rate} onWheel={e => e.target.blur()} name="rate" className='w-full sm:w-52 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="number" placeholder='Base Rate' required />
+                                :<input disabled onChange={handlechange} defaultValue={data.rate} onWheel={e => e.target.blur()} name="rate" className='w-full sm:w-52 px-2 py-2 text-[18px] border rounded-md border-slate-300 bg-transparent text-black' type="number" placeholder='Base Rate' required />
+                        
+                            }
+                            </div>
 
 
                         <div className='flex items-center justify-start'>
