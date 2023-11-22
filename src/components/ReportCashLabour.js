@@ -128,7 +128,7 @@ const ReportCashLabour = () => {
     }
 
 
-    const deletefile = async (f) => {
+    const deletecash = async (f) => {
 
         setloading(true);
 
