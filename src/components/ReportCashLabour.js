@@ -127,6 +127,34 @@ const ReportCashLabour = () => {
         window.print();
     }
 
+
+    const deletefile = async (f) => {
+
+        setloading(true);
+
+        try {
+            await api.delete(`/cash/cash-delete/${f.sr_no}`).then(async function (response) {
+                if (response.data.status == 1) {
+                    setdata(data.filter((e) => {
+                        return e !== f;
+                    }));
+                    setloading(false);
+                }
+                else {
+                    setloading(false);
+                }
+
+
+            })
+
+        } catch (error) {
+            setloading(false);
+
+
+        }
+
+    }
+
     useEffect(() => {
         let tot = 0;
 
@@ -259,6 +287,10 @@ const ReportCashLabour = () => {
                                     Edit
                                 </th>
 
+                                <th scope="col" className="text-center border px-1 py-1 whitespace-nowrap">
+                                    Delete
+                                </th>
+
                             </tr>
                         </thead>
                         <tbody className=''>
@@ -266,7 +298,7 @@ const ReportCashLabour = () => {
                             {
                                 data.length == 0
                                     ? <tr className="bg-white border-b hover:bg-gray-50 text-base">
-                                        <td colSpan={12} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                        <td colSpan={13} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
                                             No data found
                                         </td>
                                     </tr>
@@ -315,6 +347,9 @@ const ReportCashLabour = () => {
                                             <td id='hideedit1' className="text-center border px-1 py-1">
                                                 <Link state={{ values: ele }} to="/editcash" className="font-medium text-fix hover:underline">Edit</Link>
                                             </td>
+                                            <td className="text-center text-red-600 border px-3 py-1 whitespace-nowrap hover:underline underline-offset-2 cursor-pointer ">
+                                                <button onClick={() => { deletecash(ele) }}>Delete</button>
+                                            </td>
 
                                         </tr>)
                             }
@@ -323,7 +358,7 @@ const ReportCashLabour = () => {
                             {
                                 data.length != 0
                                     ? <tr className="bg-white border-b hover:bg-gray-50 text-base">
-                                        <td colSpan={12} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
+                                        <td colSpan={13} className="px-2 border py-1 font-medium text-gray-900 whitespace-nowrap ">
                                             <span className='text-fix'>Total Expenses:</span> {tot}/-
                                         </td>
                                     </tr>
