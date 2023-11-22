@@ -348,7 +348,12 @@ const ReportCashLabour = () => {
                                                 <Link state={{ values: ele }} to="/editcash" className="font-medium text-fix hover:underline">Edit</Link>
                                             </td>
                                             <td className="text-center text-red-600 border px-3 py-1 whitespace-nowrap hover:underline underline-offset-2 cursor-pointer ">
-                                                <button onClick={() => { deletecash(ele) }}>Delete</button>
+                                                {
+                                                    localStorage.getItem("role") == "Admin" && localStorage.getItem('admin_id') == "manish"
+                                                        ? <button onClick={() => { deletecash(ele) }}>Delete</button>
+                                                        : "Cant Delete"
+                                                }
+
                                             </td>
 
                                         </tr>)
