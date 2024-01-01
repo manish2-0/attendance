@@ -217,8 +217,9 @@ const WorkerInformation = ({ user }) => {
                                 <h1 className='text-fix text-lg w-fit pr-1'>Year:</h1>
                                 <select onChange={handlechange} name="year" className="h-9 text-base border rounded border-slate-300" required>
                                     <option selected className=''>Select..</option>
-                                    <option>2022</option>
+                                  
                                     <option>2023</option>
+                                    <option>2024</option>
                                 </select>
                             </div>
 
