@@ -119,6 +119,7 @@ const ViewAllWorker = () => {
                                 }
 
 
+
                                 {
                                     localStorage.getItem("role") == "Admin"
                                         ? <th scope="col" className="text-center border px-6 py-3 whitespace-nowrap">
