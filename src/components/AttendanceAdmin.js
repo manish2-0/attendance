@@ -220,7 +220,7 @@ const AttendanceAdmin = () => {
         e.preventDefault();
         // console.log(time1, "time1")
         // console.log(time2, "time2")
-        // setloading(true);
+        setloading(true);
 
         if (data[0].designation == "Office Staff") {
             if (time1 == "" || time2 == "") {
@@ -265,41 +265,41 @@ const AttendanceAdmin = () => {
             return 0;
         }
 
-        console.log(attendance, "testing")
+        // console.log(attendance, "testing")
 
-        // try {
-        //     await api.post(`attendance/attendance-register`, JSON.stringify(attendance)).then(async function (response) {
-        //         // console.log(response)
-        //         if (response.data.status == 1) {
-        //             setloading(false);
-        //             setmodal(true);
-        //             await setmodalmessage({
-        //                 "text1": "Done",
-        //                 "text2": "Attendance marked succesfully."
-        //             });
+        try {
+            await api.post(`attendance/attendance-register`, JSON.stringify(attendance)).then(async function (response) {
+                // console.log(response)
+                if (response.data.status == 1) {
+                    setloading(false);
+                    setmodal(true);
+                    await setmodalmessage({
+                        "text1": "Done",
+                        "text2": "Attendance marked succesfully."
+                    });
 
-        //             navigate('/');
+                    navigate('/');
 
-        //         }
-        //         else {
-        //             setloading(false);
-        //             setmodal(true);
-        //             await setmodalmessage({
-        //                 "text1": "Error",
-        //                 "text2": "Attendance already marked."
-        //             });
-        //         }
+                }
+                else {
+                    setloading(false);
+                    setmodal(true);
+                    await setmodalmessage({
+                        "text1": "Error",
+                        "text2": "Attendance already marked."
+                    });
+                }
 
-        //     });
+            });
 
-        // } catch (error) {
-        //     setloading(false);
-        //     setmodal(true);
-        //     setmodalmessage({
-        //         "text1": "Error Occured",
-        //         "text2": "No server response"
-        //     });
-        // }
+        } catch (error) {
+            setloading(false);
+            setmodal(true);
+            setmodalmessage({
+                "text1": "Error Occured",
+                "text2": "No server response"
+            });
+        }
     }
 
     const getpendingsites = () => {
