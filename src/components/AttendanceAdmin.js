@@ -93,7 +93,8 @@ const AttendanceAdmin = () => {
 
 
     const delayedhours = () => {
-        var startDate = new Date(0, 0, 0, 9, 45, 0);
+        // var startDate = new Date(0, 0, 0, 9, 45, 0);
+        var startDate = new Date(0, 0, 0, 9, 30, 0);
         var endDate = new Date(0, 0, 0, time1[0], time1[1], 0);
 
         var diff = endDate.getTime() - startDate.getTime();
@@ -102,6 +103,8 @@ const AttendanceAdmin = () => {
         var minutes = Math.floor(diff / 1000 / 60);
 
         setresponse(hours + ":" + minutes);
+        // console.log(hours, "delayed")
+        // console.log(minutes, "delayed")
         return [hours, minutes];
 
     }
@@ -215,7 +218,9 @@ const AttendanceAdmin = () => {
 
     const submitattendance = async (e) => {
         e.preventDefault();
-        setloading(true);
+        // console.log(time1, "time1")
+        // console.log(time2, "time2")
+        // setloading(true);
 
         if (data[0].designation == "Office Staff") {
             if (time1 == "" || time2 == "") {
@@ -250,10 +255,6 @@ const AttendanceAdmin = () => {
 
         }
 
-
-
-
-
         if (attendance.attendance == "-" || attendance.attendance == "Select.." || attendance.site_code == "-" || attendance.site_code == "Select..") {
             setloading(false);
             setmodal(true);
@@ -264,39 +265,41 @@ const AttendanceAdmin = () => {
             return 0;
         }
 
-        try {
-            await api.post(`attendance/attendance-register`, JSON.stringify(attendance)).then(async function (response) {
-                // console.log(response)
-                if (response.data.status == 1) {
-                    setloading(false);
-                    setmodal(true);
-                    await setmodalmessage({
-                        "text1": "Done",
-                        "text2": "Attendance marked succesfully."
-                    });
+        console.log(attendance, "testing")
 
-                    navigate('/');
+        // try {
+        //     await api.post(`attendance/attendance-register`, JSON.stringify(attendance)).then(async function (response) {
+        //         // console.log(response)
+        //         if (response.data.status == 1) {
+        //             setloading(false);
+        //             setmodal(true);
+        //             await setmodalmessage({
+        //                 "text1": "Done",
+        //                 "text2": "Attendance marked succesfully."
+        //             });
 
-                }
-                else {
-                    setloading(false);
-                    setmodal(true);
-                    await setmodalmessage({
-                        "text1": "Error",
-                        "text2": "Attendance already marked."
-                    });
-                }
+        //             navigate('/');
 
-            });
+        //         }
+        //         else {
+        //             setloading(false);
+        //             setmodal(true);
+        //             await setmodalmessage({
+        //                 "text1": "Error",
+        //                 "text2": "Attendance already marked."
+        //             });
+        //         }
 
-        } catch (error) {
-            setloading(false);
-            setmodal(true);
-            setmodalmessage({
-                "text1": "Error Occured",
-                "text2": "No server response"
-            });
-        }
+        //     });
+
+        // } catch (error) {
+        //     setloading(false);
+        //     setmodal(true);
+        //     setmodalmessage({
+        //         "text1": "Error Occured",
+        //         "text2": "No server response"
+        //     });
+        // }
     }
 
     const getpendingsites = () => {
@@ -313,7 +316,12 @@ const AttendanceAdmin = () => {
     }
 
     useEffect(() => {
-        if (time1 != "" || time2 != "") {
+
+        // console.log(time1, "time1");
+        // console.log(time2, "time2");
+
+        if (time1 != "" && time2 != "") {
+            console.log("inside statement")
             if (time1[0] > time2[0]) {
                 console.log("In first if")
             }
@@ -335,6 +343,7 @@ const AttendanceAdmin = () => {
                     let u = 0;
 
                     let tot = parseFloat(p) + parseFloat((o / 32)) - parseFloat((d / 16)) - parseFloat((u / 16));
+                    console.log(tot, "9:45 to normal outtime")
 
                     setattendance(values => ({ ...values, "attendance": tot }))
 
@@ -353,7 +362,8 @@ const AttendanceAdmin = () => {
                     let u = 0;
 
                     let tot = parseFloat(p) + parseFloat((o / 32)) - parseFloat((d / 16)) - parseFloat((u / 16));
-                    console.log(tot)
+                    // console.log(tot)
+                    console.log(tot, "9:45 to overtime outtime")
                     setattendance(values => ({ ...values, "attendance": tot }))
                 }
 
@@ -381,6 +391,7 @@ const AttendanceAdmin = () => {
                     let u = final;
 
                     let tot = parseFloat(p) + parseFloat((o / 32)) - parseFloat((d / 16)) - parseFloat((u / 16));
+                    console.log(tot, "9:45 to undertime outtime")
                     setattendance(values => ({ ...values, "attendance": tot }))
 
                 }
@@ -404,6 +415,7 @@ const AttendanceAdmin = () => {
                 }
 
                 let d = final;
+                // console.log(final, "final")
 
                 let t = time1[0] + ":" + time1[1] + " to " + time2[0] + ":" + time2[1];
                 setattendance(values => ({ ...values, "time": t }))
@@ -419,6 +431,7 @@ const AttendanceAdmin = () => {
                     let u = 0;
 
                     let tot = parseFloat(p) + parseFloat((o / 32)) - parseFloat((d / 16)) - parseFloat((u / 16));
+                    console.log(tot, "Above 9:45 to normal outtime")
                     setattendance(values => ({ ...values, "attendance": tot }))
                 }
 
@@ -433,11 +446,12 @@ const AttendanceAdmin = () => {
                     let u = 0;
 
                     let tot = parseFloat(p) + parseFloat((o / 32)) - parseFloat((d / 16)) - parseFloat((u / 16));
+                    console.log(tot, "Above 9:45 to overtime outtime")
                     setattendance(values => ({ ...values, "attendance": tot }))
                 }
 
 
-                if ((time2[0] <= 18 && time2[1] < 25 ) || (time2[0] < 18 && time2[1] <= 59 && time2[1] >= 0))  //Outtime condition 3 (undertime)
+                if ((time2[0] <= 18 && time2[1] < 25) || (time2[0] < 18 && time2[1] <= 59 && time2[1] >= 0))  //Outtime condition 3 (undertime)
                 {
 
                     let under = underworkinghours();
@@ -460,6 +474,7 @@ const AttendanceAdmin = () => {
                     let u = final;
 
                     let tot = parseFloat(p) + parseFloat((o / 32)) - parseFloat((d / 16)) - parseFloat((u / 16));
+                    console.log(tot, "Above 9:45 to undertime outtime")
                     setattendance(values => ({ ...values, "attendance": tot }))
 
                 }

@@ -85,7 +85,8 @@ const AttendanceSupervisor = () => {
 
 
     const delayedhours = () => {
-        var startDate = new Date(0, 0, 0, 9, 45, 0);
+        // var startDate = new Date(0, 0, 0, 9, 45, 0);
+        var startDate = new Date(0, 0, 0, 9, 30, 0);
         var endDate = new Date(0, 0, 0, time1[0], time1[1], 0);
 
         var diff = endDate.getTime() - startDate.getTime();
